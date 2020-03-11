@@ -5,45 +5,40 @@ module.exports = StyleSheet.create(
     {
         Container:{
             flex:1,
-            backgroundColor: '#1abc9c',
+            // backgroundColor: '#1abc9c',
             flexDirection:'column',
             justifyContent:'flex-start',
-            paddingHorizontal:60
+            paddingHorizontal:60,
+            backgroundColor: '#eee',
         },
         InputForm:{
-            padding:8,
-            borderWidth:1.8,
-      
+            padding:10,
+            borderBottomWidth:1.8,
             fontFamily:'roboto',
-            fontSize:15,
+            fontSize:25,
             color:'#2c3e50',
             fontWeight:'700',
-            borderRadius: 10,
-            backgroundColor:'#ecf0f1'
+            marginBottom:20,
+            // backgroundColor: '#eee',
         },
         Text:{
-            fontFamily:'roboto',
-            fontSize:20,
-            color:'#000',
-            // marginBottom:10,
-            marginTop:20,
-            fontWeight:'800',
-            paddingBottom:5,
-            paddingHorizontal:10,
-            borderBottomColor:'#eee',
-            borderBottomWidth:1,
-            
+            fontFamily:'serif',
+            fontSize:35,
+            color:'#424874',
+            marginBottom:30,
+            fontWeight:'bold',
+            paddingVertical:30,
         },
         TitleView:{     
             flexDirection: 'row',
-            justifyContent:'center'
+            // justifyContent:'center'
         },
         TextForm:{
             fontFamily:'serif',
-            fontSize:17,
-            color:'#000',
-            marginBottom:15,
-            marginTop:10
+            fontSize:20,
+            color:'#424874',
+            // marginBottom:5,
+            // marginTop:5
         },
         ButtonText:{
             fontFamily:'serif',
@@ -53,18 +48,20 @@ module.exports = StyleSheet.create(
             marginTop:5
         },
         Button:{
-            paddingHorizontal:60,
+            paddingHorizontal:35,
+            paddingVertical:6,
             borderColor:'#1e272e',
             borderWidth:1.8,
+            // width:100,
             flexDirection:'row',
             justifyContent:'center',
-            marginTop:5,
-            backgroundColor:'#c0392b',
-            borderRadius:10
+            marginTop:15,
+            backgroundColor:'#424874',
+            borderRadius:4,
         },
         ButtonForm:{
-            flexDirection:"row",
-            justifyContent:'center',   
+            flexDirection:"column",
+           
             marginTop:15    
         },
         TextForget:{

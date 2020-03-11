@@ -4,7 +4,7 @@ module.exports = StyleSheet.create(
     {
         Container:{
             flex:1,
-            backgroundColor: '#1abc9c',
+            // backgroundColor: '#424874',
             flexDirection:'column',
             justifyContent:'center',
             paddingHorizontal:50
@@ -50,7 +50,7 @@ module.exports = StyleSheet.create(
             flexDirection:'row',
             justifyContent:'center',
             marginTop:5,
-            backgroundColor:'#c0392b',
+            backgroundColor:'#424874',
             borderRadius:10,
             marginLeft:10
         },

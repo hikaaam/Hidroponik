@@ -1,17 +1,18 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
 var s = require('../../assets/auth_style/registerstyle')
+import DB from "./DB";
 export default class register extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            borderColorEmail: '#1e272e',
-            borderColorPassword: '#1e272e',
-            borderColorId: '#1e272e',
-            borderColorName: '#1e272e',
-            borderColorPhone: '#1e272e',
-            borderColorAddress: '#1e272e',
-            borderColorRepassword: '#1e272e',
+            borderColorEmail: '#A9A9A9',
+            borderColorPassword: '#A9A9A9',
+            borderColorId: '#A9A9A9',
+            borderColorName: '#A9A9A9',
+            borderColorPhone: '#A9A9A9',
+            borderColorAddress: '#A9A9A9',
+            borderColorRepassword: '#A9A9A9',
             Id: '',
             Email: '',
             Password: '',
@@ -49,7 +50,7 @@ export default class register extends Component {
                 <View style={s.Container}>
 
                     <View style={s.TitleView}>
-                        <Text style={s.Text}>Register Your Account</Text>
+                        <Text style={s.Text}>Register Account</Text>
                     </View>
 
                     <Text style={s.TextForm}>Protoype ID</Text>
@@ -80,10 +81,10 @@ export default class register extends Component {
                     <Text style={s.TextForm}>Address</Text>
                     <TextInput
                         onChangeText={(Address) => { this.setState({ Address }) }}
-                        onFocus={this.onFocusAdress}
-                        onBlur={this.onBlurAdress}
+                        onFocus={this.onFocusAddress}
+                        onBlur={this.onBlurAddress}
                         style={s.InputForm}
-                        borderColor={this.state.borderColorAdress}
+                        borderColor={this.state.borderColorAddress}
                         textContentType='addressCity' />
 
                     <Text style={s.TextForm}>Email Address</Text>
@@ -137,78 +138,78 @@ export default class register extends Component {
     }
     onFocusEmail() {
         this.setState({
-            borderColorEmail: 'red'
+            borderColorEmail: 'green'
         })
     }
     onBlurEmail() {
         this.setState({
-            borderColorEmail: '#1e272e'
+            borderColorEmail: '#A9A9A9'
         })
     }
 
     onFocusPassword() {
         this.setState({
-            borderColorPassword: 'red'
+            borderColorPassword: 'green'
         })
     }
     onBlurPassword() {
         this.setState({
-            borderColorPassword: '#1e272e'
+            borderColorPassword: '#A9A9A9'
         })
     }
 
     onFocusRepassword() {
         this.setState({
-            borderColorRepassword: 'red'
+            borderColorRepassword: 'green'
         })
     }
     onBlurRepassword() {
         this.setState({
-            borderColorRepassword: '#1e272e'
+            borderColorRepassword: '#A9A9A9'
         })
     }
 
     onFocusAddress() {
         this.setState({
-            borderColorAddress: 'red'
+            borderColorAddress: 'green'
         })
     }
     onBlurAddress() {
         this.setState({
-            borderColorAddress: '#1e272e'
+            borderColorAddress: '#A9A9A9'
         })
     }
 
     onFocusPhone() {
         this.setState({
-            borderColorPhone: 'red'
+            borderColorPhone: 'green'
         })
     }
     onBlurPhone() {
         this.setState({
-            borderColorPhone: '#1e272e'
+            borderColorPhone: '#A9A9A9'
         })
     }
 
     onFocusName() {
         this.setState({
-            borderColorName: 'red'
+            borderColorName: 'green'
         })
     }
     onBlurName() {
         this.setState({
-            borderColorName: '#1e272e'
+            borderColorName: '#A9A9A9'
         })
     }
 
     onFocusId() {
         this.setState({
-            borderColorId: 'red'
+            borderColorId: 'green'
         })
     }
     onBlurId() {
         this.setState({
-            borderColorId: '#1e272e'
+            borderColorId: '#A9A9A9'
         })
     }
 
@@ -237,16 +238,20 @@ export default class register extends Component {
                     }),
             }).then((response) => response.json())
             .then((responseJson) => {
-                if(responseJson[0]['email']==='Please Fill Your Regestration Form'){
-                    return alert(responseJson[0]['email']);
-                }
-                else if(responseJson[0]['email']==='Your Prototype Id Is Not Recognized'){
-                    return alert(responseJson[0]['email']);
+                if(responseJson['email']===_email){
+                    DB.CreateAccount(responseJson['prototype_id'],
+                        responseJson['full_name'],
+                        responseJson['phone_number'],
+                        responseJson['address'],
+                        responseJson['email'],
+                        responseJson['password']);
+                        this.props.navigation.replace('login');
                 }
                 else{
-                    alert('Berhasil Membuat Akun Silahkan Login');
-                return console.log(responseJson);
+                    alert(responseJson[0]['email'])
+                   
                 }
+     
             })
             .catch((error) => {
                 console.error(error);
@@ -255,6 +260,7 @@ export default class register extends Component {
     else{
         alert("Your Passsword Doesn't match")
     }
+
 }
 
 }

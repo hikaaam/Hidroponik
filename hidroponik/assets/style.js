@@ -33,7 +33,7 @@ module.exports = StyleSheet.create({
     //     alignItems: 'center' 
     // },
     bottom: {
-        backgroundColor: "#10ac84",
+        backgroundColor: '#424874',
         flexDirection: 'row',
         height:80,
         justifyContent:'space-evenly',
@@ -79,7 +79,7 @@ module.exports = StyleSheet.create({
         marginTop:10,
         marginHorizontal:20,
         padding:10,
-        backgroundColor: '#10ac84',
+        backgroundColor: '#424874',
         borderColor: '#2c3e50',
         borderWidth:2,
         borderRadius: 20

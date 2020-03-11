@@ -1,11 +1,12 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
-var s = require('../../assets/auth_style/loginstyle')
+var s = require('../../assets/auth_style/loginstyle');
+import DB from '../auth/DB';
 export default class login extends Component {
     constructor(props) {
         super(props);
-        this.state={borderColorEmail:'#1e272e',
-        borderColorPassword:'#1e272e',
+        this.state={borderColorEmail:'#A9A9A9',
+        borderColorPassword:'#A9A9A9',
         email:'',
         password:''
     
@@ -18,29 +19,33 @@ export default class login extends Component {
         this.loginA=this.loginA.bind(this);
  
     }
-
+  
     onFocusEmail() {
         this.setState({
-            borderColorEmail: 'red'
+            borderColorEmail: 'green'
         })
         }
     onBlurEmail() {
         this.setState({
-            borderColorEmail: '#1e272e'
+            borderColorEmail: '#A9A9A9'
         })
         }
     onFocusPassword() {
         this.setState({
-            borderColorPassword: 'red'
+            borderColorPassword: 'green'
         })
         }
     onBlurPassword() {
         this.setState({
-            borderColorPassword: '#1e272e'
+            borderColorPassword: '#A9A9A9'
         })
         }
+      
     render() {
-        const { navigate} = this.props.navigation;
+        const {replace} =this.props.navigation;
+        const { navigate } = this.props.navigation;
+        console.log( DB.state.profile);
+        if(DB.state.profile === '...loading'){
         return (
             <View style={s.Container}  >
 
@@ -72,25 +77,57 @@ export default class login extends Component {
                                 Login
                             </Text>
                         </TouchableOpacity>
-
+{/* 
                         <TouchableOpacity  onPress={()=>{navigate('register')}}
                             style={s.Button}>
                             <Text style={s.ButtonText}>
                                 Register
                             </Text>
-                        </TouchableOpacity>
+                        </TouchableOpacity> */}
             
                     </View>
 
                     <TouchableOpacity style={s.ForgetForm} onPress={()=>{navigate('forget')}}>
                     <Text style={s.TextForget}>Forget Your Password?</Text>
                     </TouchableOpacity>
-
                 </View>
-
+                <View 
+                flexDirection='column'
+                marginTop={20}
+                // justifyContent='flex-end'
+                  >
+                      <View style={s.CenteringObj}>
+                  <Text style={s.TextForget}>
+                    Don't have an account?
+                </Text>
+               
+                <TouchableOpacity
+                onPress={()=>{
+                    navigate('register');
+                }}
+                >
+                <Text style={{
+                    color:'#424874',
+                    fontFamily: 'serif',
+                    fontSize:16,
+                    fontWeight:"bold",
+                    padding:2
+                }}>
+                   SIGN UP
+                </Text>
+                </TouchableOpacity>
+                </View>     
+                  </View>      
             </View>
         )
-
+            }
+            else {
+                return(
+             <View>
+                 {replace('home')}
+             </View>
+            ); }
+          
     }
 
 loginA(email,password) {
@@ -108,6 +145,14 @@ loginA(email,password) {
           }         
             var pw = responseJson[0]['password'];
             if(pw===password){
+                DB.CreateAccount(
+                    responseJson[0]['prototype_id'],
+                    responseJson[0]['full_name'],
+                    responseJson[0]['phone_number'],
+                    responseJson[0]['address'],
+                    responseJson[0]['email'],
+                    responseJson[0]['password']
+                );
                 this.props.navigation.replace('otp');
             }
             else{
@@ -121,5 +166,5 @@ loginA(email,password) {
           });      
       }
 
-      
+   
 }

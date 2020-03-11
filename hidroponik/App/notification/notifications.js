@@ -4,6 +4,7 @@ import {
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
 var s = require('../../assets/style');
+var head = require('../../assets/header')
 
 
 export default class notifications extends Component {
@@ -23,18 +24,32 @@ export default class notifications extends Component {
         }
         return (
             <View style={s.container}>
-                {/* <View style={s.header}>
-                    <Icon name="chat" size={40} color="#ecf0f1" />
-                    <Text style={s.textHeader}>
-                        Inbox
+      <View style={ head.Header}>
+                    <View style={ head.Drawer }>
+                        <TouchableOpacity onPress={()=>{
+                            this.props.navigation.openDrawer();
+                        }}>
+                          <Icon name="reorder" size={35} color="#eee"/>
+                          </TouchableOpacity>
+                    </View>
+                    
+                    <View style={
+                        {
+                            flexDirection:"column",
+                            justifyContent:"center"
+                        }
+                    }>        
+                    <Text style={
+                        {
+                            fontFamily: "serif",
+                            fontSize:25,
+                            color:"#eee",
+                            fontWeight:"700", } }>
+                        Notifications
                     </Text>
-                    <TouchableOpacity onPress={()=>{
-                    alert('setting!');
-                    }}
-                    >
-                    <Icon name="settings" color="#ecf0f1" size={38} />
-                    </TouchableOpacity>
-                </View> */}
+
+                    </View>
+                </View>
                 <ScrollView style={s.body}>
                     <ScrollView style={s.scrollnotif}>
                         {notifbox('Hidroponik', 'You are evaluating javascript with your for loop but you dont have the curly braces around it. I think you could wrap your repeating component into a dumb component')}
@@ -46,34 +61,7 @@ export default class notifications extends Component {
                         {notifbox('Hidroponik', 'You are evaluating javascript with your for loop but you dont have the curly braces around it. I think you could wrap your repeating component into a dumb component')}
                     </ScrollView>
                 </ScrollView>
-                <View style={s.bottom}>
-                    <TouchableOpacity style={s.bottom_icons} onPress={() => { replace('iot') }}>
-                        <Icon name='build' size={40} style={s.bottom_icon} />
-                        <Text style={s.bottom_text}>IoT</Text>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        replace('status')
-                    }} style={s.bottom_icons}>
-                        <View style={s.monitorbtm}>
-                            <Text style={s.bottom_text}>STATUS</Text>
-                            <Icon name='timeline' size={40} style={s.bottom_icon} />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        replace('home')
-                    }} style={s.bottom_icons}>
-                        <View style={s.monitorbtm}>
-                            <Text style={s.bottom_text}>HOME</Text>
-                            <Icon name='home' size={40} style={s.bottom_icon} />
-                        </View>
-                    </TouchableOpacity>
-                    <TouchableOpacity onPress={() => {
-                        null;
-                    }} style={s.bottom_icons}>
-                        <Icon name='chat' size={40} style={s.bottom_icon} />
-                        <Text style={s.bottom_text} > 2</Text>
-                    </TouchableOpacity>
-                </View>
+               
             </View>
 
         );
