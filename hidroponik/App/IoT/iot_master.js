@@ -3,7 +3,7 @@ import {
     Text, TouchableOpacity, View, Image, ScrollView
 } from "react-native";
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import DB from '../auth/DB';
+import db from '../auth/DB';
 var head = require('../../assets/header')
 var s = require('../../assets/style');
 
@@ -15,9 +15,9 @@ export default class iot_master extends Component {
              <View style={ head.Header}>
                     <View style={ head.Drawer }>
                         <TouchableOpacity onPress={()=>{
-                            this.props.navigation.openDrawer();
+                             this.props.navigation.push('Setting')
                         }}>
-                          <Icon name="reorder" size={35} color="#eee"/>
+                          <Icon name="settings" size={35} color="#eee"/>
                           </TouchableOpacity>
                     </View>
                     
@@ -42,7 +42,60 @@ export default class iot_master extends Component {
 
 
             </ScrollView>
-
+            <View style={s.bottom}>
+                    <TouchableOpacity style={s.IconContainer}
+                    onPress={()=>{
+                        replace('home')
+                    }}
+                    >
+                        <View style={s.tengah}>
+                                <Icon name="home" size={37} color={db.state.Iconcolor} />
+                        </View>
+                        <View style={s.tengah}>
+                                <Text style={s.bottom_text}>Home</Text>
+                        </View>
+                    </TouchableOpacity>
+                    <View style={s.IconContainer}>
+                        <View style={s.tengah}>
+                                <Icon name="tune" size={37} color={db.state.IconcolorActive} />
+                        </View>
+                        <View style={s.tengah}>
+                                <Text style={s.bottom_text_active}>IoT</Text>
+                        </View>
+                    </View>  
+                    <TouchableOpacity style={s.IconContainer}
+                      onPress={()=>{
+                        replace('notifications')
+                    }}
+                    >
+                        <View style={s.tengah}>
+                                <Icon name="chat" size={37} color={db.state.Iconcolor} />
+                        </View>
+                        <View style={s.tengah}>
+                                <Text style={s.bottom_text}>Notifications</Text>
+                        </View>
+                    </TouchableOpacity>  
+                    <TouchableOpacity style={s.IconContainer}
+                      onPress={()=>{
+                        replace('profile')
+                    }}
+                    >
+                        <View style={s.tengah}>
+                                <Icon name="face" size={37} color={db.state.Iconcolor} />
+                        </View>
+                        <View style={s.tengah}>
+                                <Text style={s.bottom_text}>profile</Text>
+                        </View>
+                    </TouchableOpacity>  
+                    {/* <TouchableOpacity style={s.IconContainer}>
+                        <View style={s.tengah}>
+                                <Icon name="home" size={37} color={db.state.Iconcolor} />
+                        </View>
+                        <View style={s.tengah}>
+                                <Text style={s.bottom_text}>Home</Text>
+                        </View>
+                    </TouchableOpacity>     */}
+                </View>
         </View>)
 
     }

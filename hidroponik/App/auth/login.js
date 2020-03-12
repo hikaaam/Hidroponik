@@ -44,7 +44,7 @@ export default class login extends Component {
     render() {
         const {replace} =this.props.navigation;
         const { navigate } = this.props.navigation;
-        console.log( DB.state.profile);
+        // console.log( DB.state.profile);
         if(DB.state.profile === '...loading'){
         return (
             <View style={s.Container}  >
@@ -123,9 +123,9 @@ export default class login extends Component {
             }
             else {
                 return(
-             <View>
-                 {replace('home')}
-             </View>
+                    <View>
+                { replace('home')}
+                 </View>
             ); }
           
     }

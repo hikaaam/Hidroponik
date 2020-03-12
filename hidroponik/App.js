@@ -1,48 +1,41 @@
 import React, { Component } from "react";
 import {
-  Text,
   TouchableOpacity,
   View,
-  StyleSheet
+  StyleSheet,
+  Text
 } from "react-native";
 import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { NavigationContainer } from '@react-navigation/native';
-import { createStackNavigator } from '@react-navigation/stack';
-import { TransitionSpecs } from '@react-navigation/stack';
+import { NavigationContainer, useNavigation  } from '@react-navigation/native';
+import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import Home from "./App/home/home";
 import Splash from "./App/splash-screen";
+import Settings from './App/stack/settings';
 import Iot from "./App/IoT/iot_master";
 import Status from "./App/status/status";
 import login from "./App/auth/login";
+import Profile from './App/stack/profile';
 import register from "./App/auth/register";
 import Notifications from "./App/notification/notifications";
 import AuthOTP from "./App/auth/otp";
 import AuthChangePassword from "./App/auth/changePassword";
 import AuthForget from "./App/auth/forgetPassword";
-import { createDrawerNavigator } from '@react-navigation/drawer';
 const Stack = createStackNavigator();
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-const styles = StyleSheet.create(
-  {
-    tengah: {
-      flexDirection: 'row',
-      justifyContent: 'center'
-    }
-  }
-)
+import db from "./App/auth/DB";
 
+
+// const navigation = useNavigation();
 const Tab = createBottomTabNavigator();
-const Homestack = createStackNavigator();
-const IotStack = createStackNavigator();
-const NotifStack = createStackNavigator();
-const StatusStack = createStackNavigator();
-const Drawer = createDrawerNavigator();
+
+
+
 
 const ScreenOption = {
   headerStyle: {
     backgroundColor: '#424874',
-    // height: 60,
+    height: 65,
     borderBottomColor: '#ecf0f1',
     borderBottomWidth: 1,
 
@@ -52,7 +45,7 @@ const ScreenOption = {
     fontWeight: 'bold',
     color: '#ecf0f1',
     fontSize: 25,
-    marginLeft: -10,
+    marginLeft: 100,
     fontFamily: 'serif'
   },
   headerLeftContainerStyle: {
@@ -64,159 +57,18 @@ const ScreenOption = {
     open: TransitionSpecs.ScaleFromCenterAndroidSpec,
     close: TransitionSpecs.FadeInFromBottomAndroidSpec
   },
-  headerRight: () => (
-    <TouchableOpacity onPress={()=>{
-     
-    }}>
-      <Icon name="settings" color="#ecf0f1" size={38} />
-    </TouchableOpacity>
-  ),
+  // headerRight: () => (
+  //   <TouchableOpacity onPress={() => {
+   
+  //   }}>
+  //     <Icon name="settings" color="#ecf0f1" size={38} />
+  //   </TouchableOpacity>
+  // ),
   headerRightContainerStyle: {
     marginRight: 10
   }
 
 };
-
-
-const DrawerHome = () => (
-  <Drawer.Navigator
-  drawerType="back" 
-  
-  >
-  <Drawer.Screen name="Home" component={Home} />
-  <Drawer.Screen name="Notifications" component={Notifications} />
-  <Drawer.Screen name="IoT" component={Iot} />
-</Drawer.Navigator>
-)
-
-const DrawerStatus= () =>(
-  <Drawer.Navigator>
-    <Drawer.Screen name="status" component={Status}/>
-  </Drawer.Navigator>
-)
-
-const DrawerIoT= ()=>(
-  <Drawer.Navigator>
-    <Drawer.Screen name="IoT" component={Iot} />
-  </Drawer.Navigator>
-)
-
-const DrawerNotif= ()=>(
-  <Drawer.Navigator>
-    <Drawer.Screen name="Notification" component={Notifications}/>
-  </Drawer.Navigator>
-)
-
-function MyTabs() {
-  return (
-    <Tab.Navigator
-      tabBarOptions={
-        {
-          activeTintColor: '#424874',
-          inactiveTintColor: '#999',
-          style: {
-            backgroundColor: '#eee',
-          },
-          labelPosition: 'below-icon',
-          adaptive: true,
-        }
-      }
-    >
-      <Tab.Screen name="home" component={DrawerHome}
-        options={
-          {
-            title: ({ color }) =>
-              <View style={
-                {
-                  position: 'absolute',
-                  height: 40
-                }
-              }>
-                <View style={styles.tengah}>
-                  <Icon name="home" color={color} size={30} />
-                </View>
-                <View style={styles.tengah}>
-                  <Text 
-                    style={{
-                      color: color,
-                      fontSize:17
-                    }}
-                 > Home</Text>
-                </View>
-              </View>
-
-          }} />
-      <Tab.Screen name="status" component={DrawerStatus}
-        options={{
-          title: ({ color }) =>
-            <View style={
-              {
-                position: 'absolute',
-                height: 40
-              }  }>
-              <View style={styles.tengah}>
-                <Icon name="timeline" color={color} size={30} />
-              </View>
-              <View style={styles.tengah}>
-                <Text 
-                style={{
-                  color: color,
-                  fontSize:17
-                }}
-                >Status</Text>
-              </View>
-            </View>
-        }}  />
-      <Tab.Screen name="iot" component={DrawerIoT}
-        options={{
-          title: ({ color }) =>
-            <View style={
-              {
-                position: 'absolute',
-                height: 40
-              }
-            }>
-              <View style={styles.tengah}>
-                <Icon name="build" color={color} size={30} />
-              </View>
-              <View style={styles.tengah}>
-                <Text 
-                  style={{
-                    color: color,
-                    fontSize:17
-                  }}
-                >IoT</Text>
-              </View>
-            </View>
-        }} />
-      <Tab.Screen name="notifications" component={DrawerNotif}
-        options={{
-          title: ({ color }) =>
-            <View style={
-              {
-
-                position: 'absolute',
-                height: 40
-              }
-            }>
-              <View style={styles.tengah}>
-                <Icon name="chat" color={color} size={30} />
-              </View>
-              <View style={styles.tengah}>
-                <Text 
-                  style={{
-                    color: color,
-                    fontSize:17
-                  }}
-                >Notification</Text>
-              </View>
-            </View>
-        }}
-      />
-
-    </Tab.Navigator>
-  );
-}
 
 export default class App extends Component {
 
@@ -229,81 +81,76 @@ export default class App extends Component {
           screenOptions={ScreenOption}>
 
           <Stack.Screen name="splash" component={Splash} options={
-              {
-                headerShown: false
-              } } />
-            
-            <Stack.Screen name='login' component={login} options={
-              {
-                headerShown: false
-              } }/>
-               <Stack.Screen name='register' component={register} options={
-              {
-                headerTitle: null,
-                headerRight:null
-              }  }/>
-            <Stack.Screen name='forget' component={AuthForget} options={
-              {
-                headerTitle: null,
-                headerRight:null
-              } }/>
-            <Stack.Screen name='otp' component={AuthOTP} options={
-              {
-                headerShown: false
-              }
-            }/>
-            <Stack.Screen name='changepassword' component={AuthChangePassword} options={
-              {
-                headerTitle: null,
-                headerRight:null
-              } }/>
-          <Stack.Screen name="home" component={MyTabs}
-            options={
-              {
-                headerShown: false
+            {
+              headerShown: false
+            }} />
 
+          <Stack.Screen name='login' component={login} options={
+            {
+              headerShown: false
+            }} />
+          <Stack.Screen name='register' component={register} options={
+            {
+              headerTitle: null,
+              headerRight: null
+            }} />
+          <Stack.Screen name='forget' component={AuthForget} options={
+            {
+              headerTitle: null,
+              headerRight: null
+            }} />
+          <Stack.Screen name='otp' component={AuthOTP} options={
+            {
+              headerShown: false
+            }
+          } />
+          <Stack.Screen name='changepassword' component={AuthChangePassword} options={
+            {
+              headerTitle: null,
+              headerRight: null
+            }} />
+          <Stack.Screen name="home" component={Home}  
+          options={
+            {
+              headerShown:false
+            }
+          }
+          />
+          <Stack.Screen name="profile" component={Profile}
+             options={
+              {
+                headerShown:false
               }
             }
           />
-          <Stack.Screen name="inbox" component={Notifications}
-            options={
+          <Stack.Screen name='iot' component={Iot}
+             options={
               {
-                headerTitle:
-                  <Text>Inbox</Text>,
-                headerLeft: () => (
-                  <Icon name="chat" color="#ecf0f1" size={38} />
-                )
+                headerShown:false
               }
-            } />
-          <Stack.Screen name="iot" component={Iot}
-            options={
+            }
+          />
+          <Stack.Screen name='notifications' component={Notifications}
+             options={
               {
-                headerTitle:
-                  <Text>IoT</Text>,
-                headerLeft: () => (
-                  <Icon name="build" color="#ecf0f1" size={38} />
-                )
+                headerShown:false
               }
-            } />
-          <Stack.Screen name="status" component={Status}
-            options={
-              {
-                headerTitle:
-                  <Text>Status</Text>,
-                headerLeft: () => (
-                  <Icon name="timeline" color="#ecf0f1" size={38} />
-                )
-              }
-            } />
-
+            }
+          />
+          <Stack.Screen name='Setting' component={Settings} />
         </Stack.Navigator>
-  
+
       </NavigationContainer>
 
     );
   }
 }
 
-
-
-
+const styles= StyleSheet.create(
+{
+  tengah: {
+    flexDirection: 'row',
+    justifyContent: 'center'
+  }
+}
+)

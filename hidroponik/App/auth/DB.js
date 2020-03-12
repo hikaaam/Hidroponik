@@ -8,7 +8,9 @@ class DB extends Component{
     constructor(props){
         super(props);
         this.state = {
-            profile: '...loading'
+            profile: '...loading',
+            IconcolorActive:'#424874',
+            Iconcolor: '#999',
         }
     }
     CreateAccount(uid,name,phone,address,email,password){

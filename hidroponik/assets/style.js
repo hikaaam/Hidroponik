@@ -33,17 +33,18 @@ module.exports = StyleSheet.create({
     //     alignItems: 'center' 
     // },
     bottom: {
-        backgroundColor: '#424874',
+        backgroundColor: '#eee',
         flexDirection: 'row',
-        height:80,
+        height:70,
         justifyContent:'space-evenly',
         alignItems: 'center',
-        borderTopColor: '#ecf0f1',
-        borderWidth:1
+        borderTopColor: '#999',
+        borderWidth:1.2
     },
     body:{
       flex: 1 ,
-      backgroundColor: '#eee' 
+      backgroundColor: '#eee',
+
     },
     bottom_icons:{
         padding:10,
@@ -60,11 +61,17 @@ module.exports = StyleSheet.create({
         color: '#ecf0f1',
         marginBottom:5
     },
-    bottom_text:{
-        color: '#ecf0f1',
+    bottom_text_active:{
+        color: '#424874',
         fontFamily:'Roboto',
         fontWeight: 'bold',
-        fontSize:14,
+        fontSize:16,
+    },
+    bottom_text:{
+        color: '#999',
+        fontFamily:'Roboto',
+        fontWeight: 'bold',
+        fontSize:16,
     },
     monitorbtm:{
         flexDirection: 'column',
@@ -76,21 +83,55 @@ module.exports = StyleSheet.create({
     notif:{
         flexDirection: 'column',
         justifyContent: 'center',
-        marginTop:10,
-        marginHorizontal:20,
+        // marginTop:10,
+        marginHorizontal:2,
         padding:10,
-        backgroundColor: '#424874',
+        // backgroundColor: '#424874',
         borderColor: '#2c3e50',
-        borderWidth:2,
-        borderRadius: 20
+        borderRadius: 2,
+        // borderTopWidth:1,
+        borderBottomWidth:1
     },
-    notifText:{
-        color: '#ecf0f1',
+    notifbox:{
+        marginLeft:40
+    },
+    notifTitle:{
+        // color: '#ecf0f1',
         fontFamily:'Roboto',
         fontWeight: '700',
         fontSize:20,
     },
+    notifIcon:{
+        position:'absolute',
+        top:12,
+        left:8
+    },
+    notifText:{
+        // fontFamily:'Roboto',
+        // fontWeight: '900',
+        fontSize:16,
+        color:'#333'
+    },
+   notifDate:{
+    position:'absolute',
+    top:12,
+    right:8
+    },
+    notifDateText:{
+        fontSize:14,
+        fontWeight:'700'
+    },
     scrollnotif:{
      flex:1
-    }
+    },
+    tengah:{
+        flexDirection:'row',
+        justifyContent:'center',
+    },
+    IconContainer:{
+        height:'100%',
+        width:'22%',
+        flexDirection:'column',
+        justifyContent:'center'
+    },
 });

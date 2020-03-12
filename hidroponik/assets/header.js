@@ -3,7 +3,7 @@ import {StyleSheet} from "react-native";
 module.exports = StyleSheet.create({
 
     Header:{
-        height:55,
+        height:65,
         backgroundColor: "#424874",
         borderBottomColor: "#999", 
         borderBottomWidth:1.8,
@@ -12,8 +12,8 @@ module.exports = StyleSheet.create({
     },
     Drawer:{
         position: "absolute",
-        left:15,
-        top:10
+        right:15,
+        top:15
     },
 
 });
