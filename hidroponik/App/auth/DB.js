@@ -3,15 +3,16 @@ import {AsyncStorage} from "react-native";
 
 
 
-
 class DB extends Component{
+    
     constructor(props){
         super(props);
         this.state = {
-            profile: '...loading',
+            profile: 'null',
             IconcolorActive:'#424874',
             Iconcolor: '#999',
         }
+   
     }
     CreateAccount(uid,name,phone,address,email,password){
         let account = {
@@ -35,12 +36,14 @@ class DB extends Component{
         )
     }
     GetAccount(){
+        
         try{
             (async () =>{
             
             await AsyncStorage.getItem('profile').then((value)=>{
                 this.state.profile = JSON.parse(value);
-                console.log(this.state.profile._name)
+                // this.values = JSON.parse(value);
+                return value;
                 });
             })();
     }
@@ -48,7 +51,7 @@ class DB extends Component{
         
     }
     }
-    RemoveAccount(){
+    Logout(){
         AsyncStorage.removeItem('profile'),(err,result)=>{
             if(err){
                 return err;
@@ -57,7 +60,8 @@ class DB extends Component{
         }
     }
 
- 
+
+
 }
 const db = new DB();
 export default db;

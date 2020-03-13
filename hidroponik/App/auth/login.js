@@ -40,12 +40,14 @@ export default class login extends Component {
             borderColorPassword: '#A9A9A9'
         })
         }
-      
+  
+
     render() {
         const {replace} =this.props.navigation;
         const { navigate } = this.props.navigation;
+       
         // console.log( DB.state.profile);
-        if(DB.state.profile === '...loading'){
+        // if(DB.state.profile === '...loading'){
         return (
             <View style={s.Container}  >
 
@@ -120,13 +122,13 @@ export default class login extends Component {
                   </View>      
             </View>
         )
-            }
-            else {
-                return(
-                    <View>
-                { replace('home')}
-                 </View>
-            ); }
+            // }
+            // else {
+            //     return(
+            //         <View>
+            //     { replace('home')}
+            //      </View>
+            // ); }
           
     }
 

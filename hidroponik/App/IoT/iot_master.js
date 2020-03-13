@@ -38,10 +38,15 @@ export default class iot_master extends Component {
 
                     </View>
                 </View>
-            <ScrollView style={s.body}>
+                
+     <View style={s.Test}>
 
+        <Text style={s.bottom_text}>
+        This is IoT
+        </Text>
 
-            </ScrollView>
+     </View>
+
             <View style={s.bottom}>
                     <TouchableOpacity style={s.IconContainer}
                     onPress={()=>{

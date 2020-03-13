@@ -44,11 +44,23 @@ export default class Profile extends Component{
                     </View>
                 </View>
 
-            <View style={s.body}>
+            <View style={s.Test}>
 
-                <Text>
+                <Text style={s.bottom_text}>
                    This is Profile
                 </Text>
+                <TouchableOpacity style={{
+                    flexDirection:'row',
+                    justifyContent:'center',
+                    alignItems:'center'
+                }} 
+                onPress={()=>{db.Logout();
+                this.props.navigation.replace('login');
+                }}
+                >        
+                    <Icon name="input" size={37} color='red' />
+                    <Text style={{fontSize:20,color:'red',marginLeft:2}}>Logout</Text>
+                </TouchableOpacity>
 
             </View>
 

@@ -1,9 +1,11 @@
 import React, { Component } from "react";
 import {
     TextInput, StyleSheet, Text, View, Platform,
-    Image
+    Image, AsyncStorage
 } from "react-native";
 import * as Progress from 'react-native-progress';
+
+import DB from '../App/auth/DB';
 
 const styles = StyleSheet.create(
     {
@@ -55,9 +57,31 @@ export default class Splash extends Component {
 
     componentDidMount() {
         this.animate();
-        setTimeout(() => {
-            this.props.navigation.replace('login');
-        }, 2000);
+        // setTimeout(() => {
+        //     if(DB.GetAccount().length <1){
+        //         console.log(DB.GetAccount());
+        //         this.props.navigation.replace('login');
+        //     }
+        //     else{
+        //         console.log(DB.GetAccount());
+        //     this.props.navigation.replace('home');
+        //     }
+        //     console.log(name)
+
+        // }, 2000);
+        AsyncStorage.getItem('profile').then(value => {
+            if(value){
+                console.log(value);      
+                setTimeout(() => {
+                    this.props.navigation.replace('home');
+              }, 2000);
+            }
+            else {
+                setTimeout(() => {
+                    this.props.navigation.replace('login');
+              }, 2000);
+            }
+        });  
 
     }
     componentWillUnmount(){

@@ -8,6 +8,14 @@ var {
 
 module.exports = StyleSheet.create({
 
+    Test:{
+        flex:1,
+        backgroundColor:'#eee',
+        flexDirection:'column',
+        justifyContent:'center',
+        alignItems:'center'
+    },
+
     container: {
         flex: 1,
         backgroundColor: '#1abc9c',
