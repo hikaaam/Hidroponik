@@ -57,18 +57,6 @@ export default class Splash extends Component {
 
     componentDidMount() {
         this.animate();
-        // setTimeout(() => {
-        //     if(DB.GetAccount().length <1){
-        //         console.log(DB.GetAccount());
-        //         this.props.navigation.replace('login');
-        //     }
-        //     else{
-        //         console.log(DB.GetAccount());
-        //     this.props.navigation.replace('home');
-        //     }
-        //     console.log(name)
-
-        // }, 2000);
         AsyncStorage.getItem('profile').then(value => {
             if(value){
                 console.log(value);      

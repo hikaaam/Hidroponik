@@ -28,6 +28,15 @@ module.exports = StyleSheet.create(
             fontFamily:'serif',
             fontWeight:"100"      
         },
+        TextItemtds:{
+            color:'#eee',
+            fontSize:55,
+            position:'absolute',
+            left:10,
+            top:26,
+            fontFamily:'serif',
+            fontWeight:"100"  
+        },
         TextMode:{
             color:'#eee',
             position:'absolute',

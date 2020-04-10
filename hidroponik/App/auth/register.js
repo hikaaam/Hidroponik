@@ -116,9 +116,9 @@ export default class register extends Component {
 
                     <View style={s.ButtonForm}>
 
-                        <TouchableOpacity onPress={()=>{
+                        <TouchableOpacity onPress={() => {
                             this.RegisterAccount();
-                        }}  style={s.Button}>
+                        }} style={s.Button}>
                             <Text style={s.ButtonText}>
                                 Register Your Account
                             </Text>
@@ -213,54 +213,54 @@ export default class register extends Component {
         })
     }
 
-    RegisterAccount(){
+    RegisterAccount() {
         var _id = this.state.Id;
-       var  _name = this.state.Name;
+        var _name = this.state.Name;
         var _phone = this.state.Phone;
-       var  _address= this.state.Address;
-       var  _email = this.state.Email;
-       var  _password = this.state.Password;
+        var _address = this.state.Address;
+        var _email = this.state.Email;
+        var _password = this.state.Password;
         var _rePassword = this.state.RePassword;
-        if(_password === _rePassword){
+        if (_password === _rePassword) {
             return fetch('http://192.168.43.47:4000/users', {
-                    method: 'POST',
-                    headers: {
-                        Accept: 'application/json',
-                        'Content-Type': 'application/json',
-                    },
-                    body: JSON.stringify({              
-                            prototype_id:_id,
-                            full_name:_name,
-                            phone_number:_phone,
-                            address:_address,
-                            email:_email,
-                            password:_password    
-                    }),
+                method: 'POST',
+                headers: {
+                    Accept: 'application/json',
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({
+                    prototype_id: _id,
+                    full_name: _name,
+                    phone_number: _phone,
+                    address: _address,
+                    email: _email,
+                    password: _password
+                }),
             }).then((response) => response.json())
-            .then((responseJson) => {
-                if(responseJson['email']===_email){
-                    DB.CreateAccount(responseJson['prototype_id'],
-                        responseJson['full_name'],
-                        responseJson['phone_number'],
-                        responseJson['address'],
-                        responseJson['email'],
-                        responseJson['password']);
+                .then((responseJson) => {
+                    if (responseJson['email'] === _email) {
+                        DB.CreateAccount(responseJson['prototype_id'],
+                            responseJson['full_name'],
+                            responseJson['phone_number'],
+                            responseJson['address'],
+                            responseJson['email'],
+                            responseJson['password']);
                         this.props.navigation.replace('login');
-                }
-                else{
-                    alert(responseJson[0]['email'])
-                   
-                }
-     
-            })
-            .catch((error) => {
-                console.error(error);
-            });
-      }
-    else{
-        alert("Your Passsword Doesn't match")
-    }
+                    }
+                    else {
+                        alert(responseJson[0]['email'])
 
-}
+                    }
+
+                })
+                .catch((error) => {
+                    console.error(error);
+                });
+        }
+        else {
+            alert("Your Passsword Doesn't match")
+        }
+
+    }
 
 }
