@@ -47,7 +47,7 @@ export default class Profile extends Component{
             <View style={s.Test}>
 
                 <Text style={s.bottom_text}>
-                   This is Profile
+                   This is {db.state.profile._name}'s Profile
                 </Text>
                 <TouchableOpacity style={{
                     flexDirection:'row',

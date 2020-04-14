@@ -3,11 +3,12 @@ import {
   TouchableOpacity,
   View,
   StyleSheet,
-  Text
+  Text,
+  Dimensions
 } from "react-native";
 import 'react-native-gesture-handler';
 import Icon from 'react-native-vector-icons/MaterialIcons';
-import { NavigationContainer, useNavigation  } from '@react-navigation/native';
+import { NavigationContainer, useNavigation } from '@react-navigation/native';
 import { createStackNavigator, TransitionSpecs } from '@react-navigation/stack';
 import Home from "./App/home/home";
 import Splash from "./App/splash-screen";
@@ -21,8 +22,10 @@ import Notifications from "./App/notification/notifications";
 import AuthOTP from "./App/auth/otp";
 import AuthChangePassword from "./App/auth/changePassword";
 import AuthForget from "./App/auth/forgetPassword";
+import Prototype from './App/home/prototype';
 const Stack = createStackNavigator();
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
+import Icon2 from 'react-native-vector-icons/FontAwesome';
 import db from "./App/auth/DB";
 
 
@@ -32,7 +35,7 @@ const Tab = createBottomTabNavigator();
 
 
 
-const ScreenOption = {
+const ScreenOption = ({ navigation }) =>( {
   headerStyle: {
     backgroundColor: '#424874',
     height: 65,
@@ -40,12 +43,13 @@ const ScreenOption = {
     borderBottomWidth: 1,
 
   },
+  headerBackImage:()=>( <Icon2 name='chevron-left' size={30} color={'white'} />),
   headerTintColor: '#fff',
   headerTitleStyle: {
     fontWeight: 'bold',
     color: '#ecf0f1',
     fontSize: 25,
-    marginLeft: 100,
+    // marginLeft: 100,
     fontFamily: 'serif'
   },
   headerLeftContainerStyle: {
@@ -57,18 +61,18 @@ const ScreenOption = {
     open: TransitionSpecs.ScaleFromCenterAndroidSpec,
     close: TransitionSpecs.FadeInFromBottomAndroidSpec
   },
-  // headerRight: () => (
-  //   <TouchableOpacity onPress={() => {
-   
-  //   }}>
-  //     <Icon name="settings" color="#ecf0f1" size={38} />
-  //   </TouchableOpacity>
-  // ),
+  headerRight: () => (
+    <TouchableOpacity onPress={() => {
+      navigation.push('Setting')
+    }}>
+      <Icon name="settings" color="#ecf0f1" size={38} />
+    </TouchableOpacity>
+  ),
   headerRightContainerStyle: {
     marginRight: 10
   }
 
-};
+});
 
 export default class App extends Component {
 
@@ -91,7 +95,7 @@ export default class App extends Component {
             }} />
           <Stack.Screen name='register' component={register} options={
             {
-              headerTitle: null,
+              headerTitle: 'Register Account',
               headerRight: null
             }} />
           <Stack.Screen name='forget' component={AuthForget} options={
@@ -104,40 +108,51 @@ export default class App extends Component {
               headerShown: false
             }
           } />
+          <Stack.Screen name='prototype' component={Prototype} options={
+            {
+              title: "Prototype",
+              headerRight: null
+            }
+          } />
           <Stack.Screen name='changepassword' component={AuthChangePassword} options={
             {
               headerTitle: null,
               headerRight: null
             }} />
-          <Stack.Screen name="home" component={Home}  
-          options={
-            {
-              headerShown:false
+          <Stack.Screen name="home" component={Home}
+            options={
+              {
+                title: 'Home',
+
+              }
             }
-          }
           />
           <Stack.Screen name="profile" component={Profile}
-             options={
+            options={
               {
-                headerShown:false
+                headerShown: false
               }
             }
           />
           <Stack.Screen name='iot' component={Iot}
-             options={
+            options={
               {
-                headerShown:false
+                headerShown: false
               }
             }
           />
           <Stack.Screen name='notifications' component={Notifications}
-             options={
+            options={
               {
-                headerShown:false
+                headerShown: false
               }
             }
           />
-          <Stack.Screen name='Setting' component={Settings} />
+          <Stack.Screen name='Setting' component={Settings} options={
+            {
+              headerRight:null
+            }
+          } />
         </Stack.Navigator>
 
       </NavigationContainer>
@@ -146,11 +161,11 @@ export default class App extends Component {
   }
 }
 
-const styles= StyleSheet.create(
-{
-  tengah: {
-    flexDirection: 'row',
-    justifyContent: 'center'
+const styles = StyleSheet.create(
+  {
+    tengah: {
+      flexDirection: 'row',
+      justifyContent: 'center'
+    }
   }
-}
 )

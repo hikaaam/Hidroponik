@@ -18,7 +18,7 @@ module.exports = StyleSheet.create({
 
     container: {
         flex: 1,
-        backgroundColor: '#1abc9c',
+        // backgroundColor: '#1abc9c',
         flexDirection: 'column',
        
       
@@ -73,13 +73,13 @@ module.exports = StyleSheet.create({
         color: '#424874',
         fontFamily:'Roboto',
         fontWeight: 'bold',
-        fontSize:16,
+        fontSize:14,
     },
     bottom_text:{
         color: '#999',
         fontFamily:'Roboto',
         fontWeight: 'bold',
-        fontSize:16,
+        fontSize:14,
     },
     monitorbtm:{
         flexDirection: 'column',

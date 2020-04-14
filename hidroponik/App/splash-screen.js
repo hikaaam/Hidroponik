@@ -1,8 +1,9 @@
 import React, { Component } from "react";
 import {
     TextInput, StyleSheet, Text, View, Platform,
-    Image, AsyncStorage
+    Image, AsyncStorage, Dimensions
 } from "react-native";
+import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as Progress from 'react-native-progress';
 
 import DB from '../App/auth/DB';
@@ -11,21 +12,21 @@ const styles = StyleSheet.create(
     {
         container: {
             flex: 1,
-            backgroundColor: '#424874'
+            justifyContent: 'center',
+            alignItems: 'center'
+            // backgroundColor: '#424874'
         },
         logo: {
-            padding: 20,
-            width: 420,
-            height: 408,
-            alignContent: "center",
-            marginTop: 20,
+
+            width: 220,
+            height: 220,
             marginBottom: 10,
         },
         splashtext: {
             padding: 20,
             fontFamily: 'cursive',
             fontSize: 50,
-            color: '#ecf0f1',
+            color: 'black',
             textAlign: 'center'
         },
         circles: {
@@ -49,7 +50,7 @@ export default class Splash extends Component {
             progress: 0,
             indeterminate: true,
         };
-       
+
     }
     // componentDidMount() {
 
@@ -57,22 +58,29 @@ export default class Splash extends Component {
 
     componentDidMount() {
         this.animate();
+        http://api.openweathermap.org/data/2.5/weather?q=tegal,jawa%20tengah,%20id&appid=ea8196364825b22cddb8e5ba6af77cd3&units=metric
         AsyncStorage.getItem('profile').then(value => {
-            if(value){
-                console.log(value);      
+            if (value) {
+                console.log(value);
                 setTimeout(() => {
-                    this.props.navigation.replace('home');
-              }, 2000);
+                    DB.GetAccount();
+                    AsyncStorage.getItem('otp').then((values) => {
+                        if (values) {
+                            this.props.navigation.replace('home');
+                        }
+                        else {
+                            this.props.navigation.replace('otp');
+                        }
+                    });
+
+                }, 2000);
             }
             else {
                 setTimeout(() => {
                     this.props.navigation.replace('login');
-              }, 2000);
+                }, 2000);
             }
-        });  
-
-    }
-    componentWillUnmount(){
+        });
 
     }
 
@@ -87,7 +95,7 @@ export default class Splash extends Component {
                     progress = 1;
                 }
                 this.setState({ progress });
-            }, 500);
+            }, 100);
         }, 1000);
     }
     render() {
@@ -95,28 +103,24 @@ export default class Splash extends Component {
         return (
 
             <View style={styles.container}>
-                <Image source={require('../assets/image/logo.png')}
+                {/* <Image source={require('../assets/image/logo.png')}
                     style={styles.logo}
                     resizeMode={"contain"}
                     onLoadStart={() => this.setState({ loading: true })}
                     onLoadEnd={() => {
-                    this.setState({ loading: false })
+                        this.setState({ loading: false })
                     }}
+                /> */}
+                <Icon style={{ marginBottom: 30 }} name='seedling' color='green' size={Dimensions.get('window').width / 3} />
+                {/* {this.state.loading} */}
+                <Progress.Bar
+                    style={styles.progress}
+                    progress={this.state.progress}
+                    indeterminate={this.state.indeterminate}
                 />
-                 {this.state.loading}
-                <View style={styles.circles}>
-                    <Progress.CircleSnail
-                        style={styles.progress}
-                        color={['#f1c40f', '#ecf0f1']}
-                        size={85}
-                        thickness={8}
-                        spinDuration={250}
-                        duration={500}
-                    />
-                </View>
-                <Text style={styles.splashtext}>
+                {/* <Text style={styles.splashtext}>
                     Welcome To the Future
-                </Text>
+                </Text> */}
             </View>
 
         );

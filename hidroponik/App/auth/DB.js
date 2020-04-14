@@ -11,6 +11,7 @@ class DB extends Component{
             profile: 'null',
             IconcolorActive:'#424874',
             Iconcolor: '#999',
+            otp:'null'
         }
    
     }
@@ -21,15 +22,14 @@ class DB extends Component{
             _email :email,
             _password :password,
             _phone :phone,
-            _uid :{uid}
+            _uid :uid
         }
         AsyncStorage.setItem('profile',JSON.stringify(account),(err,result) =>{
            if(err){
                return err;
            }
-           else{
-            
-               console.log(result);
+           else{     
+            //    console.log(result);
                this.GetAccount();
            }
         }
@@ -43,9 +43,20 @@ class DB extends Component{
             await AsyncStorage.getItem('profile').then((value)=>{
                 this.state.profile = JSON.parse(value);
                 // this.values = JSON.parse(value);
+                console.log(value);
                 return value;
                 });
             })();
+            (async () =>{
+            
+                await AsyncStorage.getItem('otp').then((value)=>{
+                    this.state.otp = JSON.parse(value);
+                    // this.values = JSON.parse(value);
+                    // console.log(value);
+                    return value;
+                    });
+                })();
+            
     }
     catch(error){
         
@@ -58,8 +69,29 @@ class DB extends Component{
             }
             console.log(result);
         }
+        AsyncStorage.removeItem('otp'),(err,result)=>{
+            if(err){
+                return err;
+            }
+            console.log(result);
+        }
     }
-
+    Otp(status){
+        let account = {
+            _status : status,
+       
+        }
+        AsyncStorage.setItem('otp',JSON.stringify(account),(err,result) =>{
+           if(err){
+               return err;
+           }
+           else{     
+            //    console.log(result);
+               this.GetAccount();
+           }
+        }
+        )
+    }
 
 
 }

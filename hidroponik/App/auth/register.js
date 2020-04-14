@@ -49,18 +49,18 @@ export default class register extends Component {
 
                 <View style={s.Container}>
 
-                    <View style={s.TitleView}>
+                    {/* <View style={s.TitleView}>
                         <Text style={s.Text}>Register Account</Text>
-                    </View>
+                    </View> */}
 
-                    <Text style={s.TextForm}>Protoype ID</Text>
-                    <TextInput
+                    {/* <Text style={s.TextForm}>Protoype ID</Text> */}
+                    {/* <TextInput
                         onChangeText={(Id) => { this.setState({ Id }) }}
                         onFocus={this.onFocusId}
                         onBlur={this.onBlurId}
                         style={s.InputForm}
-                        borderColor={this.state.borderColorId} />
-
+                        borderColor={this.state.borderColorId} /> */}
+                    <View style={{marginTop:'25%'}}></View>
                     <Text style={s.TextForm}>Full Name</Text>
                     <TextInput
                         onChangeText={(Name) => { this.setState({ Name }) }}
@@ -127,7 +127,7 @@ export default class register extends Component {
                     </View>
 
                     <TouchableOpacity style={s.ForgetForm}>
-                        <Text style={s.TextForget}>You Don't Have A Protoype ID?</Text>
+                        {/* <Text style={s.TextForget}>You Don't Have A Protoype ID?</Text> */}
                     </TouchableOpacity>
 
                 </View>
@@ -214,7 +214,7 @@ export default class register extends Component {
     }
 
     RegisterAccount() {
-        var _id = this.state.Id;
+        // var _id = this.state.Id;
         var _name = this.state.Name;
         var _phone = this.state.Phone;
         var _address = this.state.Address;
@@ -229,7 +229,6 @@ export default class register extends Component {
                     'Content-Type': 'application/json',
                 },
                 body: JSON.stringify({
-                    prototype_id: _id,
                     full_name: _name,
                     phone_number: _phone,
                     address: _address,
@@ -239,7 +238,8 @@ export default class register extends Component {
             }).then((response) => response.json())
                 .then((responseJson) => {
                     if (responseJson['email'] === _email) {
-                        DB.CreateAccount(responseJson['prototype_id'],
+                        DB.CreateAccount(
+                            responseJson['id'],
                             responseJson['full_name'],
                             responseJson['phone_number'],
                             responseJson['address'],

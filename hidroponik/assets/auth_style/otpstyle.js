@@ -56,8 +56,28 @@ module.exports = StyleSheet.create(
         },
         ButtonForm:{
             flexDirection:"row",
-            justifyContent:'flex-start',       
+            justifyContent:'flex-end',       
         },
+        BackToLogin:{
+            position:'absolute',
+            top:25,
+            left:25,
+            flexDirection:'row',
+            alignItems:'center'
+        },
+        BackToLoginText:{
+            fontSize:18,
+            marginLeft:10,
+            color:'#424874',
+            fontWeight:"bold",
+            fontStyle:"italic",
+            marginRight:10,
+        },
+        TextTimer:{
+            fontFamily:"monospace",
+            fontSize:16,
+            fontWeight:"bold"
+        }
        
     }
 );

@@ -141,14 +141,14 @@ loginA(email,password) {
               alert('Please Fill Email And Password')
           }
        else{
-           console.log(responseJson);
+        //    console.log(responseJson);
            if(mail==='there is no account with this email'){
             alert(mail)
           }         
             var pw = responseJson[0]['password'];
             if(pw===password){
                 DB.CreateAccount(
-                    responseJson[0]['prototype_id'],
+                    responseJson[0]['id'],
                     responseJson[0]['full_name'],
                     responseJson[0]['phone_number'],
                     responseJson[0]['address'],
