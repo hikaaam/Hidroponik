@@ -14,6 +14,7 @@ import Home from "./App/home/home";
 import Splash from "./App/splash-screen";
 import Settings from './App/stack/settings';
 import Iot from "./App/IoT/iot_master";
+import settingPrototype from './App/stack/settingPrototype';
 import Status from "./App/status/status";
 import login from "./App/auth/login";
 import Profile from './App/stack/profile';
@@ -111,6 +112,12 @@ export default class App extends Component {
           <Stack.Screen name='prototype' component={Prototype} options={
             {
               title: "Prototype",
+              headerRight: null
+            }
+          } />
+           <Stack.Screen name='settingPrototype' component={settingPrototype} options={
+            {
+              title: "Prototype Settings",
               headerRight: null
             }
           } />

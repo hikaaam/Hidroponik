@@ -33,7 +33,8 @@ class DB extends Component{
                this.GetAccount();
            }
         }
-        )
+        );
+        AsyncStorage.setItem('devices',['first data']);
     }
     GetAccount(){
         
@@ -47,15 +48,6 @@ class DB extends Component{
                 return value;
                 });
             })();
-            (async () =>{
-            
-                await AsyncStorage.getItem('otp').then((value)=>{
-                    this.state.otp = JSON.parse(value);
-                    // this.values = JSON.parse(value);
-                    // console.log(value);
-                    return value;
-                    });
-                })();
             
     }
     catch(error){

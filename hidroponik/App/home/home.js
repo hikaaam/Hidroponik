@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
-import { View, Text, TouchableOpacity, Button, Dimensions, ImageBackground } from 'react-native';
+import { View, Text, TouchableOpacity, Button, Dimensions, ImageBackground, AsyncStorage } from 'react-native';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import Icon2 from 'react-native-vector-icons/FontAwesome5';
+import Icon3 from 'react-native-vector-icons/FontAwesome';
 import Carousel from 'react-native-snap-carousel';
 import CardView from 'react-native-cardview'
 import moment from 'moment';
@@ -65,9 +66,35 @@ class home extends Component {
                 })
         }
         componentDidMount() {
-                setInterval(() => {
+        AsyncStorage.getItem('devices').then(value =>{
+               let val = JSON.parse(value);
+                this.setState({
+                        carouselItems:[
+                                {
+
+                                        title: "Online",
+                                        text: val[0],
+                                },
+                                {
+                                        title: "Offline",
+                                        text: val[1],
+                                },
+                                {
+                                        default: true,
+                                        navigate: this.props.navigation
+
+                                },
+
+                        ],
+                })
+        } );
+        
+          this.ticking = setInterval(() => {
                         this.getTime();
                 }, 1000);
+        }
+        componentWillUnmount(){
+                clearInterval(this.ticking);
         }
         _renderItem({ item, index }) {
                 if (item.default) {
@@ -83,7 +110,7 @@ class home extends Component {
                                 }}>
                                         <Text style={{ fontSize: 26 }}>Add New Device</Text>
                                         <TouchableOpacity
-                                                onPress={() => { item.navigate.push('prototype') }}
+                                                onPress={() => { item.navigate.push('settingPrototype') }}
                                                 style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                                                 <View style={{ width: 130, height: 130, borderRadius: 100, backgroundColor: '#424874', alignItems: 'center', justifyContent: 'center' }}>
                                                         <Icon2 color='#fff' name='plus-circle' size={120} />
@@ -100,12 +127,40 @@ class home extends Component {
                                 backgroundColor: 'floralwhite',
                                 borderRadius: 5,
                                 height: 350,
-                                padding: 50,
+                                padding: 20,
                                 marginLeft: 25,
                                 marginRight: 25,
                         }}>
-                                <Text style={{ fontSize: 30 }}>{item.title}</Text>
-                                <Text>{item.text}</Text>
+                                <View style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-evenly',
+                                        height: "25%",
+                                        alignItems: 'center',
+                                        borderBottomColor: '#555555aa',
+                                        borderBottomWidth: 1,
+                                }}>
+                                        <Text style={{ fontSize: 30 }}>{item.title}</Text>
+                                        <Icon3 name='circle' size={25} color={(item.title == 'Online') ? 'green' : 'red'} />
+                                </View>
+                                <View style={{
+                                        flexDirection: 'column',
+                                        justifyContent: 'space-evenly',
+                                        height: '70%',
+                                        alignItems: 'center'
+                                }}>
+                                        <Text style={{
+                                                position:'absolute',
+                                                top:10,
+                                                left: 0
+                                             
+                                        }}>{(item.title == 'Online') ? '' : 'Last Online : '}</Text>
+                                         <Icon2 name='robot' size={90} color='#424874' />
+                                        <Text style={{
+                                                // marginTop:25
+                                        }}>{item.text}</Text>
+                                       
+                                </View>
+
                         </View>
 
                 )
@@ -135,13 +190,13 @@ class home extends Component {
                                                                 margin: 15
                                                         }}>
                                                                 <View style={{
-                                                                        flexDirection:'column',
-                                                                        justifyContent:'center',
-                                                                        alignItems:'flex-start'
+                                                                        flexDirection: 'column',
+                                                                        justifyContent: 'center',
+                                                                        alignItems: 'flex-start'
                                                                 }}>
                                                                         <Icon2 style={{
                                                                                 marginLeft: 15
-                                                                        }} name={(this.state.Time.substr(-2)=='AM' ? 'cloud-sun' : 'cloud-moon' )} color='white' size={60} />
+                                                                        }} name={(this.state.Time.substr(-2) == 'AM' ? 'cloud-sun' : 'cloud-moon')} color='white' size={60} />
                                                                         <Text style={{
                                                                                 color: 'white',
                                                                                 fontSize: 55,
@@ -176,7 +231,7 @@ class home extends Component {
 
                                         </CardView>
 
-                                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop:50 }}>
+                                        <View style={{ flex: 1, flexDirection: 'row', justifyContent: 'center', marginTop: 50 }}>
                                                 <Carousel
                                                         layout={"default"}
                                                         ref={ref => this.carousel = ref}
