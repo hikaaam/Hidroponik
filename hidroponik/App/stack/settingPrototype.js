@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { View, Text, TextInput, TouchableHighlight, AsyncStorage, ActivityIndicator } from 'react-native';
+import { View, Text, TextInput, TouchableHighlight, AsyncStorage, ActivityIndicator, Alert } from 'react-native';
 
 class settingPrototype extends Component {
     constructor(props) {
@@ -60,60 +60,62 @@ class settingPrototype extends Component {
                         activeOpacity={0.6}
                         underlayColor="#DDDDDD"
                         onPress={() => {
-                            try {
+                            // try {
 
-                                this.setState({ isLoading: true })
-                                setTimeout(() => {
-                                    fetch('http://192.168.43.47:4000/prototype?id=' + this.state.Text).then((response) => response.json())
-                                        .then((responseJson) => {
-                                            if (responseJson.length < 1) {
-                                                console.log('data kosong')
-                                                this.setState({ isLoading: false })
-                                            }
-                                            else {
-                                                if (this.state.devices == null) {
-                                                    AsyncStorage.setItem('devices', this.state.Text)
-                                                }
-                                                else {
-                                                    if (Array.isArray(this.state.devices)) {
-                                                        if (!this.findData(this.state.devices, this.state.Text)) {
-                                                            this.state.devices.push(this.state.Text);
-                                                            AsyncStorage.setItem('devices', JSON.stringify(this.state.Text));
-                                                            console.log(this.state.devices);
-                                                            this.setState({ isLoading: false });
-                                                        }
-                                                        else {
-                                                            console.log("fail : \n");
-                                                            console.log(this.state.devices);
-                                                            this.setState({ isLoading: false })
-                                                        }
-                                                    }
-                                                    else {
-                                                        let val = [this.state.devices];
-                                                        if (!this.findData(val, this.state.Text)) {
-                                                            val.push(this.state.Text);
-                                                            AsyncStorage.setItem('devices', JSON.stringify(val));
-                                                            // console.log(JSON.stringify(val));
-                                                            this.setState({ isLoading: false });
-                                                        }
-                                                        else{
-                                                            console.log("fail : \n");
-                                                            console.log(val)
-                                                            this.setState({ isLoading: false });
-                                                        }
+                            //     this.setState({ isLoading: true })
+                            //     setTimeout(() => {
+                            //         fetch('http://192.168.43.47:4000/prototype?id=' + this.state.Text).then((response) => response.json())
+                            //             .then((responseJson) => {
+                            //                 if (responseJson.length < 1) {
+                            //                     console.log('data kosong')
+                            //                     this.setState({ isLoading: false })
+                            //                 }
+                            //                 else {
+                            //                     if (this.state.devices == null) {
+                            //                         AsyncStorage.setItem('devices', this.state.Text)
+                            //                     }
+                            //                     else {
+                            //                         if (Array.isArray(this.state.devices)) {
+                            //                             if (!this.findData(this.state.devices, this.state.Text)) {
+                            //                                 this.state.devices.push(this.state.Text);
+                            //                                 AsyncStorage.setItem('devices', JSON.stringify(this.state.Text));
+                            //                                 console.log(this.state.devices);
+                            //                                 this.setState({ isLoading: false });
+                            //                             }
+                            //                             else {
+                            //                                 console.log("fail : \n");
+                            //                                 console.log(this.state.devices);
+                            //                                 this.setState({ isLoading: false })
+                            //                             }
+                            //                         }
+                            //                         else {
+                            //                             let val = [this.state.devices];
+                            //                             if (!this.findData(val, this.state.Text)) {
+                            //                                 val.push(this.state.Text);
+                            //                                 AsyncStorage.setItem('devices', JSON.stringify(val));
+                            //                                 // console.log(JSON.stringify(val));
+                            //                                 this.setState({ isLoading: false });
+                            //                             }
+                            //                             else{
+                            //                                 console.log("fail : \n");
+                            //                                 console.log(val)
+                            //                                 this.setState({ isLoading: false });
+                            //                             }
 
-                                                    }
-                                                }
-                                            }
-
-
-                                        });
-                                }, 500);
+                            //                         }
+                            //                     }
+                            //                 }
 
 
-                            } catch (error) {
-                                console.log(error);
-                            }
+                            //             });
+                            //     }, 500);
+
+
+                            // } catch (error) {
+                            //     console.log(error);
+                            // }
+                      
+                            Alert.alert('belum berfungsi',' silahkan login di hidroponik.ta2020.xyz');
                         }}>
                         <Text
                             style={{

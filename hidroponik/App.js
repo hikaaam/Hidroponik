@@ -21,14 +21,20 @@ import Profile from './App/stack/profile';
 import register from "./App/auth/register";
 import Notifications from "./App/notification/notifications";
 import AuthOTP from "./App/auth/otp";
-import AuthChangePassword from "./App/auth/changePassword";
 import AuthForget from "./App/auth/forgetPassword";
 import Prototype from './App/home/prototype';
 const Stack = createStackNavigator();
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import Icon2 from 'react-native-vector-icons/FontAwesome';
 import db from "./App/auth/DB";
-
+import editProfile from "./App/stack/editProfile";
+import changePassword from './App/stack/changePassword';
+import changepasswordOtp from './App/auth/changepasswordOtp';
+import changepasswordEmail from './App/auth/changePasswordEmail';
+import pupuk from './App/IoT/pupuk';
+import other from './App/IoT/other';
+import tempertature from './App/IoT/temperature';
+import waterlevel from './App/IoT/waterlevel';
 
 // const navigation = useNavigation();
 const Tab = createBottomTabNavigator();
@@ -101,7 +107,7 @@ export default class App extends Component {
             }} />
           <Stack.Screen name='forget' component={AuthForget} options={
             {
-              headerTitle: null,
+              title:'Forget Password',
               headerRight: null
             }} />
           <Stack.Screen name='otp' component={AuthOTP} options={
@@ -121,9 +127,9 @@ export default class App extends Component {
               headerRight: null
             }
           } />
-          <Stack.Screen name='changepassword' component={AuthChangePassword} options={
+          <Stack.Screen name='changepassword' component={changePassword} options={
             {
-              headerTitle: null,
+              title:"Change Password",
               headerRight: null
             }} />
           <Stack.Screen name="home" component={Home}
@@ -137,27 +143,69 @@ export default class App extends Component {
           <Stack.Screen name="profile" component={Profile}
             options={
               {
-                headerShown: false
+                title:'Profile'
               }
             }
           />
           <Stack.Screen name='iot' component={Iot}
             options={
               {
-                headerShown: false
+                title:'IoT'
               }
             }
           />
           <Stack.Screen name='notifications' component={Notifications}
             options={
               {
-                headerShown: false
+                title:'Notifications'
               }
             }
           />
           <Stack.Screen name='Setting' component={Settings} options={
             {
               headerRight:null
+            }
+          } />
+           <Stack.Screen name='editprofile' component={editProfile} options={
+            {
+              headerRight:null,
+              title:"Edit Profile"
+            }
+          } />
+          <Stack.Screen name='changepasswordOtp' component={changepasswordOtp} options={
+            {
+              headerRight:null,
+              title:"Otp"
+            }
+          } />
+         <Stack.Screen name='changepasswordEmail' component={changepasswordEmail} options={
+            {
+              headerRight:null,
+              title:"Change Password"
+            }
+          } />
+          <Stack.Screen name='waterlevel' component={waterlevel} options={
+            {
+              headerRight:null,
+              title:"Water Level"
+            }
+          } />
+          <Stack.Screen name='pupuk' component={pupuk} options={
+            {
+              headerRight:null,
+              title:"Fertilizer"
+            }
+          } />
+          <Stack.Screen name='temp' component={tempertature} options={
+            {
+              headerRight:null,
+              title:"Temperature"
+            }
+          } />
+          <Stack.Screen name='other' component={other} options={
+            {
+              headerRight:null,
+              title:"Other"
             }
           } />
         </Stack.Navigator>

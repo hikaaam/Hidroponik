@@ -34,6 +34,9 @@ export default class OTP extends Component {
 
     componentDidMount() {
         var emails = this.props.route.params.Email;
+        this.setState({
+            Email:emails
+        })
         console.log(emails);
         let linkLocal = 'http://'+db.state.linkLocal+'/hidroponik/api/Mobile';
         setTimeout(() => {
@@ -275,7 +278,7 @@ export default class OTP extends Component {
                                     var otpinput = this.state.otp1 + '' + this.state.otp2 + '' + this.state.otp3 + '' + this.state.otp4 + '' + otp;
                                     if (otpinput == this.state.otp) {
                                         db.Otp(true);
-                                        this.props.navigation.replace('splash');
+                                        this.props.navigation.replace('changepasswordEmail',{Email:this.state.Email});
                                     }
                                     else {
                                         Alert.alert('Failed', "Your OTP password doesn't match")

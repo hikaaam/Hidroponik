@@ -133,29 +133,31 @@ export default class login extends Component {
     }
 
 loginA(email,password) {
-        return fetch('http://192.168.43.47:4000/users/'+email)
+    let linkLocal = 'http://'+DB.state.linkLocal+'/hidroponik/api/Login/';
+    let link = 'http://ta2020.xyz:4000';
+        return fetch(linkLocal+email)
           .then((response) => response.json())
           .then((responseJson) => {
-            var mail = responseJson[0]['email'];
+            var mail = responseJson['email'];
           if(email.length<1 || password.length<1){
               alert('Please Fill Email And Password')
           }
        else{
         //    console.log(responseJson);
-           if(mail==='there is no account with this email'){
+           if(mail!==email){
             alert(mail)
           }         
-            var pw = responseJson[0]['password'];
-            if(pw===password){
+            var pw = responseJson['password'];
+            if(pw==password){
                 DB.CreateAccount(
-                    responseJson[0]['id'],
-                    responseJson[0]['full_name'],
-                    responseJson[0]['phone_number'],
-                    responseJson[0]['address'],
-                    responseJson[0]['email'],
-                    responseJson[0]['password']
+                    responseJson['id'],
+                    responseJson['full_name'],
+                    responseJson['phone_number'],
+                    responseJson['address'],
+                    responseJson['email'],
+                    responseJson['password']
                 );
-                this.props.navigation.replace('otp');
+                this.props.navigation.replace('otp',{Email:mail});
             }
             else{
                 alert("Your Password Didn't Match");

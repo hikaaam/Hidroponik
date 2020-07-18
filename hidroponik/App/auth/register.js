@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import { View, Text, TextInput, TouchableOpacity, ScrollView } from "react-native";
+import { View, Text, TextInput, TouchableOpacity, ScrollView, Alert } from "react-native";
 var s = require('../../assets/auth_style/registerstyle')
 import DB from "./DB";
+import db from "./DB";
 export default class register extends Component {
     constructor(props) {
         super(props);
@@ -42,6 +43,30 @@ export default class register extends Component {
         this.onFocusRepassword = this.onFocusRepassword.bind(this);
         this.onBlurRepassword = this.onBlurRepassword.bind(this);
     }
+    nullCheck(foo) {
+        if (foo.length < 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    ContainNumber(foo){    
+        var pattern = /\d/g;
+        return pattern.test(foo);
+   
+    }
+    NumberOnly(foo){
+        var pattern = /^[0-9]+$/;
+        return pattern.test(foo);
+    }
+    ValidPhone(foo){
+        return foo.substr(0,2)=="08" && foo.length == 12 || foo.length == 13;
+    }
+    ValidEmail(foo){
+        var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(foo);
+    }
+
     render() {
         const { replace } = this.props.navigation;
         return (
@@ -60,10 +85,13 @@ export default class register extends Component {
                         onBlur={this.onBlurId}
                         style={s.InputForm}
                         borderColor={this.state.borderColorId} /> */}
-                    <View style={{marginTop:'25%'}}></View>
+                    <View style={{ marginTop: '25%' }}></View>
                     <Text style={s.TextForm}>Full Name</Text>
                     <TextInput
-                        onChangeText={(Name) => { this.setState({ Name }) }}
+                        onChangeText={(Name) => {
+                            this.setState({ Name })
+                        }
+                        }
                         onFocus={this.onFocusName}
                         onBlur={this.onBlurName}
                         style={s.InputForm}
@@ -221,8 +249,40 @@ export default class register extends Component {
         var _email = this.state.Email;
         var _password = this.state.Password;
         var _rePassword = this.state.RePassword;
+        let linkLocal = 'http://' + db.state.linkLocal + '/hidroponik/api/Login';
+        let link = 'http://ta2020.xyz:4000';
+    
+        if(this.nullCheck(_name)){
+            return alert("Please Fill Your Name Correctly!!")
+        }
+        if(this.nullCheck(_phone)){
+            return alert("Please Fill Your Phone Number Correctly!!")
+        }
+        if(this.nullCheck(_address)){
+            return alert("Please Fill Your Address Correctly!!")
+        }
+        if(this.nullCheck(_password)){
+            return alert("Please Fill Your Password Correctly!!")
+        }
+
+
+        if(this.ContainNumber(_name)){
+            return alert("Invalid Name!!")
+        }
+        if(!this.NumberOnly(_phone)){
+            return alert("Invalid Phone Number!!")
+        }
+        if(!this.ValidPhone(_phone)){
+            return alert("Invalid!! phone number should start with 08 and have 12 or 13 character length")
+        }
+        if(!this.ValidEmail(_email)){
+            return alert("Invalid Email Address!!");
+        }
+        
+        
+
         if (_password === _rePassword) {
-            return fetch('http://192.168.43.47:4000/users', {
+            return fetch(linkLocal, {
                 method: 'POST',
                 headers: {
                     Accept: 'application/json',
@@ -237,7 +297,7 @@ export default class register extends Component {
                 }),
             }).then((response) => response.json())
                 .then((responseJson) => {
-                    if (responseJson['email'] === _email) {
+                    if (responseJson['email'] == _email) {
                         DB.CreateAccount(
                             responseJson['id'],
                             responseJson['full_name'],
@@ -248,9 +308,10 @@ export default class register extends Component {
                         this.props.navigation.replace('login');
                     }
                     else {
-                        alert(responseJson[0]['email'])
+                        alert(responseJson['email'])
 
                     }
+
 
                 })
                 .catch((error) => {

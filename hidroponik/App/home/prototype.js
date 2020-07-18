@@ -22,25 +22,30 @@ export default class Home extends Component {
       }
     componentDidMount(){
         db.GetAccount();
-        this.socket = io("http://192.168.43.47:4000");
+        let id = this.props.route.params.id;
+        console.log(id);
+        let local = "http://"+db.state.linkLocal+":4000";
+        let host = "http://ta2020.xyz:4000";
+        this.socket = io(local);
         this.socket.on('connect', function (data) {
             // io("http://192.168.43.47:4000").emit('new user', db.state.profile._email );
-            this.emit('new user', db.state.profile._email );
+            this.emit('new user', id);
         });
         // this.socket.emit('findId','milos@gmail.com')
         this.socket.on("temp", msg => {
+            console.log(msg);
             this.setState({
-                suhu: [msg['val'],msg['msg']]
+                suhu: [msg['_val'],msg['_msg']]
             })
         });
         this.socket.on("tds", msg => {
             this.setState({
-                tds: [msg['val'],msg['msg']]
+                tds: [msg['_val'],msg['_msg']]
             })
         });
         this.socket.on("wl", msg => {
             this.setState({
-                wl: [msg['val'],msg['msg']]
+                wl: [msg['_val'],msg['_msg']]
             })
         });
     

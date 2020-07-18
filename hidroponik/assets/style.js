@@ -18,8 +18,10 @@ module.exports = StyleSheet.create({
 
     container: {
         flex: 1,
+        
         // backgroundColor: '#1abc9c',
         flexDirection: 'column',
+        // justifyContent:'space-between'
        
       
     },

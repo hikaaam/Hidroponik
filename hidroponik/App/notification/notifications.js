@@ -34,32 +34,7 @@ export default class notifications extends Component {
         }
         return (
             <View style={s.container}>
-      <View style={ head.Header}>
-                    <View style={ head.Drawer }>
-                        <TouchableOpacity onPress={()=>{
-                            this.props.navigation.push('Setting')
-                        }}>
-                          <Icon name="settings" size={35} color="#eee"/>
-                          </TouchableOpacity>
-                    </View>
-                    
-                    <View style={
-                        {
-                            flexDirection:"column",
-                            justifyContent:"center"
-                        }
-                    }>        
-                    <Text style={
-                        {
-                            fontFamily: "serif",
-                            fontSize:25,
-                            color:"#eee",
-                            fontWeight:"700", } }>
-                        Notifications
-                    </Text>
-
-                    </View>
-                </View>
+    
                 <ScrollView style={s.body}>
                     <ScrollView style={s.scrollnotif}>
                         {notifbox('Hidroponik', 'You are evaluating javascript with your for loop but you dont have the curly braces around it. I think you could wrap your repeating component into a dumb component','12 Mar, 09:23 PM')}

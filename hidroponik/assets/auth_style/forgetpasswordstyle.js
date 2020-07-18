@@ -1,10 +1,10 @@
 import {StyleSheet} from "react-native";
-
+import DB from '../../App/auth/DB';
 module.exports = StyleSheet.create(
     {
         Container:{
             flex:1,
-            backgroundColor: '#1abc9c',
+            backgroundColor: '#eee',
             flexDirection:'column',
             justifyContent:'center',
             paddingHorizontal:60
@@ -13,18 +13,17 @@ module.exports = StyleSheet.create(
             padding:20,
             borderWidth:1.8,
             marginBottom:15,
-            fontFamily:'serif',
-            fontSize:22,
+            fontSize:18,
             color:'#2c3e50',
             fontWeight:'700',
             borderRadius: 10,
             backgroundColor:'#ecf0f1'
         },
         Text:{
-            fontFamily:'serif',
-            fontSize:18,
-            color:'#000',
+            fontSize:20,
+            color:DB.state.IconcolorActive,
             marginBottom:15,
+            fontWeight:'bold'
         },
         ButtonText:{
             fontFamily:'serif',
@@ -34,15 +33,16 @@ module.exports = StyleSheet.create(
             marginTop:5
         },
         Button:{
+            paddingHorizontal:35,
+            paddingVertical:6,
             borderColor:'#1e272e',
             borderWidth:1.8,
-            paddingVertical:5,
-            paddingHorizontal:20,
             flexDirection:'row',
             justifyContent:'center',
-            marginTop:5,
-            backgroundColor:'#c0392b',
-            borderRadius:10
+            marginTop:15,
+            backgroundColor:'#424874',
+            borderRadius:4,
+           
         },
         ButtonForm:{
             flexDirection:"row",

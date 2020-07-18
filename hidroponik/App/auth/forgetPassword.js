@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 import { View, Text, TextInput, TouchableOpacity, StyleSheet } from "react-native";
+import db from "./DB";
 var s = require('../../assets/auth_style/forgetpasswordstyle')
 export default class ForgetPassword extends Component {
     constructor(props) {
@@ -14,7 +15,7 @@ export default class ForgetPassword extends Component {
 
     onFocusEmail() {
         this.setState({
-            borderColorEmail: 'red'
+            borderColorEmail: 'green'
         })
         }
     onBlurEmail() {
@@ -42,6 +43,7 @@ export default class ForgetPassword extends Component {
                     <TextInput name='email' 
                     onFocus={this.onFocusEmail}
                     onBlur={this.onBlurEmail}
+                    onChangeText={(value)=>{this.setState({Email:value})}}
                     style={s.InputForm}
                     borderColor={this.state.borderColorEmail}
                     textContentType='emailAddress'
@@ -50,7 +52,7 @@ export default class ForgetPassword extends Component {
 
                     <View style={s.ButtonForm}>
                         
-                        <TouchableOpacity onPress={()=>{navigate('changepassword')}}
+                        <TouchableOpacity onPress={()=>{navigate('changepasswordOtp', {Email:this.state.Email} )}}
                          style={s.Button}>
                             <Text style={s.ButtonText}>
                                 Send Email

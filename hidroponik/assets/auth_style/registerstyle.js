@@ -15,7 +15,7 @@ module.exports = StyleSheet.create(
             padding:10,
             borderBottomWidth:1.8,
             fontFamily:'roboto',
-            fontSize:25,
+            fontSize:18,
             color:'#2c3e50',
             fontWeight:'700',
             marginBottom:20,

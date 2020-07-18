@@ -58,7 +58,7 @@ export default class Splash extends Component {
 
     componentDidMount() {
         this.animate();
-        http://api.openweathermap.org/data/2.5/weather?q=tegal,jawa%20tengah,%20id&appid=ea8196364825b22cddb8e5ba6af77cd3&units=metric
+       
         AsyncStorage.getItem('profile').then(value => {
             if (value) {
                 console.log(value);
@@ -66,10 +66,25 @@ export default class Splash extends Component {
                     DB.GetAccount();
                     AsyncStorage.getItem('otp').then((values) => {
                         if (values) {
+                            let linkLocal = 'http://'+DB.linkLocal+'/hidroponik/mobileAuth/';
+                            let link= 'http:/ta2020.xyz/hidroponik/index.php/mobileAuth/';
+                            try {
+                                fetch(link+DB.state.profile._uid)
+                                .then((response) => response.json())
+                                .then((responseJson) => {
+                               
+                                    AsyncStorage.setItem('devices',JSON.stringify(responseJson));
+                                //  console.log(responseJson);
+                                });
+                             
+                              } catch (error) {
+                                  console.log(error);
+                              }
                             this.props.navigation.replace('home');
+                        
                         }
                         else {
-                            this.props.navigation.replace('otp');
+                            this.props.navigation.replace('otp',{Email:DB.state.profile._email});
                         }
                     });
 

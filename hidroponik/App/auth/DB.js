@@ -11,7 +11,9 @@ class DB extends Component{
             profile: 'null',
             IconcolorActive:'#424874',
             Iconcolor: '#999',
-            otp:'null'
+            otp:'null',
+            tempEmail:'',
+            linkLocal:'192.168.47.147'
         }
    
     }
@@ -34,7 +36,7 @@ class DB extends Component{
            }
         }
         );
-        AsyncStorage.setItem('devices',['first data']);
+      
     }
     GetAccount(){
         
@@ -84,7 +86,10 @@ class DB extends Component{
         }
         )
     }
-
+    tempEmail(email){
+        console.log(email);
+        this.state.tempEmail=email;
+    }
 
 }
 const db = new DB();
