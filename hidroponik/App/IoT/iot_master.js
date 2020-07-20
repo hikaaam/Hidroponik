@@ -83,7 +83,7 @@ export default class iot_master extends Component {
                             {this.IconRender('water', db.state.IconcolorActive, 'Water Level', 'waterlevel', value.prototype_id)}
                             {this.IconRender('tint', db.state.IconcolorActive, 'Fertilizer', 'pupuk', value.prototype_id)}
                             {this.IconRender('thermometer-half', db.state.IconcolorActive, 'Temperature', 'temp', value.prototype_id)}
-                            {this.IconRender('toolbox', db.state.IconcolorActive, 'Others', 'other', value.prototype_id)}
+                            {this.IconRender('cloud', db.state.IconcolorActive, 'Humidity', 'other', value.prototype_id)}
                         </View>
                     </View>
                 </CardView>

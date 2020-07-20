@@ -166,8 +166,8 @@ class home extends Component {
                                         borderBottomColor: '#555555aa',
                                         borderBottomWidth: 1,
                                 }}>
-                                        <Text style={{ fontSize: 30 }}>{'Online'}</Text>
-                                        <Icon3 name='circle' size={25} color={(item.title == 'Online') ? 'red' : 'green'} />
+                                        <Text style={{ fontSize: 30 }}>Prototype</Text>
+                                        <Icon2 name='seedling' size={25} color={(item.title == 'Online') ? 'red' : 'green'} />
                                 </View>
                                 <View style={{
                                         flexDirection: 'column',
@@ -180,7 +180,7 @@ class home extends Component {
                                                 top: 10,
                                                 left: 0
 
-                                        }}>{(item.title == 'Online') ? '' : 'Created At : ' + moment(item.created_at).format('d MMMM Y')}</Text>
+                                        }}>{moment(item.created_at).fromNow()}</Text>
                                         <Icon2 name='robot' size={90} color='#424874' style={{
                                                 marginTop:'20%'
                                         }} />

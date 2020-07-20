@@ -13,7 +13,8 @@ class DB extends Component{
             Iconcolor: '#999',
             otp:'null',
             tempEmail:'',
-            linkLocal:'192.168.47.147'
+            linkLocal:'192.168.43.47',
+
         }
    
     }
@@ -33,6 +34,26 @@ class DB extends Component{
            else{     
             //    console.log(result);
                this.GetAccount();
+           }
+        }
+        );
+      
+    }
+    CreateData(a,b,c,d){
+        let account = {
+            _temp : a,
+            _hum : b,
+            _tds :c,
+            _wl :d,
+   
+        }
+        AsyncStorage.setItem('datapro',JSON.stringify(account),(err,result) =>{
+           if(err){
+               return err;
+           }
+           else{     
+               console.log(result);
+          
            }
         }
         );
