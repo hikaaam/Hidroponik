@@ -86,6 +86,9 @@ export default class OTP extends Component {
                             }, 1000);
                             setTimeout(() => {
                                 clearInterval(i);
+                                this.setState({
+                                    isDisabled:false
+                                })
                             }, 31000);
     
                     }

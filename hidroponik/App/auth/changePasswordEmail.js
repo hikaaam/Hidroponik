@@ -44,8 +44,9 @@ export default class changePasswordEmail extends Component {
         this.onFocusRepassword = this.onFocusRepassword.bind(this);
         this.onBlurRepassword = this.onBlurRepassword.bind(this);
     }
+
     componentDidMount() {
-    console.log(DB.state.tempEmail)
+        console.log(DB.state.tempEmail)
     }
     render() {
         const { replace } = this.props.navigation;
@@ -220,12 +221,13 @@ export default class changePasswordEmail extends Component {
         var _oldPassword = this.state.oldPassword;
         var _newPassword = this.state.newPassword;
         var _rePassword = this.state.rePassword;
-        let linkLocal = 'http://'+DB.state.linkLocal+'/hidroponik/api/Prototype/' + DB.state.tempEmail;
+        let linkLocal = 'http://' + DB.state.linkLocal + '/hidroponik/api/Prototype/' + DB.state.tempEmail;
         console.log(linkLocal);
         let link = 'http://ta2020.xyz:4000';
-      
-            if (_newPassword == _rePassword) {
-                return fetch(linkLocal, {
+
+        if (_newPassword == _rePassword) {
+            try {
+                fetch(linkLocal, {
                     method: 'PUT',
                     headers: {
                         Accept: 'application/json',
@@ -235,33 +237,36 @@ export default class changePasswordEmail extends Component {
                         newPassword: _newPassword
                     }),
                 }).then((response) => response.json())
-                    .then((responseJson) => {
+                .then((responseJson) => {
 
-                        DB.CreateAccount(
-                            responseJson['id'],
-                            responseJson['full_name'],
-                            responseJson['phone_number'],
-                            responseJson['address'],
-                            responseJson['email'],
-                            responseJson['password']);
-                        Alert.alert(
-                            'Sucess',
-                            'Data Updated!',
-                            [
-                                { text: 'OK', onPress: () => { this.props.navigation.popToTop() } }
-                            ],
-                            { cancelable: false }
-                        );
-                    })
-                    .catch((error) => {
-                        console.error(error);
-                    });
+                    DB.CreateAccount(
+                        responseJson['id'],
+                        responseJson['full_name'],
+                        responseJson['phone_number'],
+                        responseJson['address'],
+                        responseJson['email'],
+                        responseJson['password']);
+                    Alert.alert(
+                        'Sucess',
+                        'Data Updated!',
+                        [
+                            { text: 'OK', onPress: () => { this.props.navigation.popToTop() } }
+                        ],
+                        { cancelable: false }
+                    );
+                })
+              
             }
-            else{
+            catch(err) {
+                // Alert.alert("Error!!","Email Salah")
+                // console.log(err);
+            }
+        }
+            else {
                 Alert.alert('Failed', "Your New Password Doesn't match");
             }
-        
     }
+  
 
 
 

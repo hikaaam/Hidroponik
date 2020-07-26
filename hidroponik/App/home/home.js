@@ -82,25 +82,27 @@ class home extends Component {
                                         marginLeft: 25,
                                         marginRight: 25,
                                 }}>
+                                       
                                         <Text style={{ fontSize: 26 }}>Add New Device</Text>
                                         <TouchableOpacity
                                                 onPress={() => { 
-                                                        let linkLocal = 'http://192.168.43.48/hidroponik/api/Prototype';
-                                                        let link ='';
-                                                        let id=db.state.profile._uid;
-                                                        // console.log('/nid nya adalah : '+id);
-                                                        fetch(linkLocal,{
-                                                                method: 'POST',
-                                                                headers: {
-                                                                    Accept: 'application/json',
-                                                                    'Content-Type': 'application/json',
-                                                                },
-                                                                body: JSON.stringify({
-                                                                   id:id
-                                                                })
-                                                            }).then((data)=>{
-                                                               item.default.replace('home');
-                                                        });
+                                                        // let linkLocal = 'http://'+db.state.linkLocal+'/hidroponik/api/Prototype';
+                                                        // let link ='';
+                                                        // let id=db.state.profile._uid;
+                                                        // // console.log('/nid nya adalah : '+id);
+                                                        // fetch(linkLocal,{
+                                                        //         method: 'POST',
+                                                        //         headers: {
+                                                        //             Accept: 'application/json',
+                                                        //             'Content-Type': 'application/json',
+                                                        //         },
+                                                        //         body: JSON.stringify({
+                                                        //            id:id
+                                                        //         })
+                                                        //     }).then((data)=>{
+                                                        //        item.default.replace('home');
+                                                        // });
+                                                        item.default.replace("addproto");
                                                  }}
                                                 style={{ flex: 1, width: '100%', flexDirection: 'row', justifyContent: 'center', alignItems: 'center', height: '100%' }}>
                                                 <View style={{ width: 130, height: 130, borderRadius: 100, backgroundColor: '#424874', alignItems: 'center', justifyContent: 'center' }}>

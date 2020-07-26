@@ -35,6 +35,8 @@ import pupuk from './App/IoT/pupuk';
 import other from './App/IoT/other';
 import tempertature from './App/IoT/temperature';
 import waterlevel from './App/IoT/waterlevel';
+import settingproto from './App/stack/SettingProto';
+import addproto from './App/home/addprototype';
 
 // const navigation = useNavigation();
 const Tab = createBottomTabNavigator();
@@ -206,6 +208,18 @@ export default class App extends Component {
             {
               headerRight:null,
               title:"Other"
+            }
+          } />
+           <Stack.Screen name='settingproto' component={settingproto} options={
+            {
+              headerRight:null,
+              title:"Settings Prototype"
+            }
+          } />
+           <Stack.Screen name='addproto' component={addproto} options={
+            {
+              headerRight:null,
+              title:"Add Prototype"
             }
           } />
         </Stack.Navigator>

@@ -81,9 +81,9 @@ export default class iot_master extends Component {
                     }}>
                         <View style={{ flexDirection: 'row', height: '100%', alignItems: 'flex-end' }}>
                             {this.IconRender('water', db.state.IconcolorActive, 'Water Level', 'waterlevel', value.prototype_id)}
-                            {this.IconRender('tint', db.state.IconcolorActive, 'Fertilizer', 'pupuk', value.prototype_id)}
+                           
                             {this.IconRender('thermometer-half', db.state.IconcolorActive, 'Temperature', 'temp', value.prototype_id)}
-                            {this.IconRender('cloud', db.state.IconcolorActive, 'Humidity', 'other', value.prototype_id)}
+   
                         </View>
                     </View>
                 </CardView>
@@ -93,7 +93,7 @@ export default class iot_master extends Component {
     IconRender(__name, __color, __text, _link, _id) {
         return (
             <TouchableOpacity style={{
-                width: '25%',
+                width: '50%',
                 height: '80%',
                 justifyContent: 'space-evenly',
                 alignItems: 'center',
@@ -102,8 +102,11 @@ export default class iot_master extends Component {
             }}
                 onPress={() => { this.props.navigation.navigate(_link, { data: _id }) }}
             >
-                <Icon2 name={__name} color={__color} size={44} />
-                <Text>{__text}</Text>
+                <Icon2 name={__name} color={__color} size={60} />
+                <Text style={{
+                    fontSize:20,
+                    marginVertical:10
+                }}>{__text}</Text>
             </TouchableOpacity>
         )
     }

@@ -17,62 +17,87 @@ export default class Home extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            suhu: [],
-            tds: [],
-            wl: [],
-            hum:[]
+            suhu: ['offline!!'],
+            tds: ['offline!!'],
+            wl: ['offline!!'],
+            hum: ['offline!!']
         };
     }
-    CardViewRender(data) {
+    CardViewRender(data, nama,Ikon,ukuran,warna) {
 
         return (
-            <CardView style={{ height: 200, width: Dimensions.get('window').width - 30, marginLeft: 15, marginVertical: 10, justifyContent: 'space-between' }}
+            <CardView style={{
+                backgroundColor: warna, height: 180, width: Dimensions.get('window').width - 30, marginLeft: 15, marginVertical: 4, justifyContent: 'center',
+                alignItem: 'center'
+            }}
                 cardElevation={2}
                 cardMaxElevation={2}
                 cornerRadius={5}
             >
                 <View style={{
                     flexDirection: 'row',
-                    justifyContent: 'space-between',
-                    height: '20%'
+                    justifyContent: 'center',
+                    alignItems: 'center',
+                    height: '10%'
                 }}>
                     <View style={{
                         height: "100%",
-                        width: "40%",
+                        width: "100%",
                         borderRadius: 5,
                         justifyContent: 'center',
-                        alignItems: 'flex-start',
-                        marginTop: '2%',
-                        marginLeft: '2%',
+                        alignItems: 'center',
+                        // marginTop: '2%',
+                        // marginLeft: '2%',
 
                     }}>
+                        <Text style={{
+                            fontSize: 50,
+                            color: '#eee',
+                            fontWeight: '700',
+                            fontFamily: 'serif',
+                            // position:'absolute',
+                            // top:60,
 
+                        }}> {data} </Text>
                     </View>
                     <View style={{
                         width: '30%',
-                        flexDirection: 'row',
+                        flexDirection: 'column',
                         justifyContent: 'flex-end',
-                        marginTop: '2%',
-                        marginRight: '2%',
-                        alignItems: 'center'
+                        alignItems: 'flex-end',
+                        position: 'absolute',
+                        marginTop: '3%',
+                        marginRight: '3%',
+                        right: 0,
+                        bottom: '5%'
                     }}>
-                        <Icon2 name='seedling' size={25} color="green" style={{
+                        <Icon2 name='seedling' size={30} color="#eee" style={{
                             marginRight: '2%',
-                        }} />
-
+                        }} />  
+                        <Icon2 name={Ikon} size={ukuran} color="#eee" style={{
+                            marginRight: '2%',
+                            top:"30%"
+                        }} />            
                     </View>
+            
 
                 </View>
 
                 <View style={{
-                    height: '60%',
+                    // height: '60%',
                     flexDirection: 'column',
+                    position: 'absolute',
+                    bottom: '2%'
 
                 }}>
-                    <Text style={b.TextMode}>test</Text>
-                    {/* <View style={{ flexDirection: 'row', height: '100%', alignItems: 'flex-end' }}>
-                   
-                    </View> */}
+                    <Text style={{
+                        color: '#eee',
+                        position: 'absolute',
+                        fontWeight: 'bold',
+                        left: 10,
+                        bottom: 10,
+                        fontSize: 20
+                    }}> {nama} </Text>
                 </View>
             </CardView>
         );
@@ -83,7 +108,7 @@ export default class Home extends Component {
         let id = this.props.route.params.id;
 
         let local = "http://" + db.state.linkLocal + ":4000";
-      
+
         let host = "http://ta2020.xyz:4000";
         this.socket = io(local);
         this.socket.on('connect', function (data) {
@@ -94,52 +119,31 @@ export default class Home extends Component {
         this.socket.on("temp", msg => {
             // console.log(msg);
             this.setState({
-                suhu: [msg['_val'], msg['_msg']]
-                
+                suhu: [msg['_val']+"°c", msg['_msg']]
+
             })
             this.check
         });
         this.socket.on("tds", msg => {
             this.setState({
-                tds: [msg['_val'], msg['_msg']]
+                tds: [msg['_val']+"-ppm", msg['_msg']]
             })
         });
         this.socket.on("wl", msg => {
             this.setState({
-                wl: [msg['_val'], msg['_msg']]
+                wl: [msg['_val']+"%", msg['_msg']]
             })
         });
         this.socket.on("hum", msg => {
             this.setState({
-                hum: [msg['_val'], msg['_msg']]
+                hum: [msg['_val']+"%", msg['_msg']]
             })
         });
         console.log(this.state.suhu.length);
-       this.check();
+
     }
-  
-check(){
-    // if(this.state.suhu.length >=1){
-        try {
-         
-            fetch('https://'+db.state.linkLocal+"/api/Login/"+id, {
-                method: 'PUT',
-                headers: {
-                    Accept: 'application/json',
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    hum: this.state.hum,
-                    tds: this.state.tds,
-                    wl: this.state.tds,
-                    temp: this.state.suhu
-                })
-            });
-        } catch (error) {
-            console.log(error);
-        }
-    // }
-}
+
+
     render() {
 
         const { replace } = this.props.navigation;
@@ -149,7 +153,7 @@ check(){
 
                 <ScrollView style={b.bodyContainer}>
 
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                         <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}
                             source={require('../../assets/image/temperatur.png')} >
                             <Text style={b.TextItem}>
@@ -159,11 +163,14 @@ check(){
                                 Temperature: {this.state.suhu[1]}
                             </Text>
                         </ImageBackground>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
-                    {/* {this.CardViewRender()} */}
-
-                    <TouchableOpacity>
+                    {this.CardViewRender(this.state.suhu[0], "Temperature","thermometer-half",50,"#a83232")}
+                    {this.CardViewRender(this.state.wl[0], "Water Level","water",30,db.state.IconcolorActive)}
+                    {this.CardViewRender(this.state.hum[0], "Humidity","cloud",30,"#32a844")}
+                    {this.CardViewRender(this.state.tds[0], "Tds","tint",50,"#a87932")}
+                    
+                    {/* <TouchableOpacity>
                         <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}
                             source={require('../../assets/image/humidity.png')} >
                             <Text style={b.TextItemtds}>
@@ -173,8 +180,8 @@ check(){
                                 Tds: {this.state.tds[1]}
                             </Text>
                         </ImageBackground>
-                    </TouchableOpacity>
-
+                    </TouchableOpacity> */}
+{/* 
                     <TouchableOpacity>
                         <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}
                             source={require('../../assets/image/temperatur.png')} >
@@ -187,7 +194,7 @@ check(){
                         </ImageBackground>
                     </TouchableOpacity>
                     <TouchableOpacity>
-                        {/* <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}
+                        <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}
                     source={require('../../assets/image/phmeter.png')} >  
                       <Text style={b.TextItem}>
                         20%
@@ -195,10 +202,10 @@ check(){
                     <Text style={b.TextMode}>
                         Condition : Good 
                     </Text>
-                    </ImageBackground> */}
-                    </TouchableOpacity>
+                    </ImageBackground>
+                    </TouchableOpacity> */}
 
-                    <TouchableOpacity>
+                    {/* <TouchableOpacity>
                         <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}
                             source={require('../../assets/image/humidity.png')} >
                             <Text style={b.TextItem}>
@@ -209,7 +216,7 @@ check(){
                                 Humidity
                     </Text>
                         </ImageBackground>
-                    </TouchableOpacity>
+                    </TouchableOpacity> */}
 
                 </ScrollView>
             </View>

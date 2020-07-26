@@ -1,6 +1,7 @@
 'use strict';
 
 var React = require('react-native');
+const { default: db } = require('../App/auth/DB');
 
 var {
     StyleSheet,
@@ -94,33 +95,38 @@ module.exports = StyleSheet.create({
         flexDirection: 'column',
         justifyContent: 'center',
         // marginTop:10,
-        marginHorizontal:2,
+        marginHorizontal:8,
         padding:10,
         // backgroundColor: '#424874',
         borderColor: '#2c3e50',
         borderRadius: 2,
         // borderTopWidth:1,
-        borderBottomWidth:1
-    },
+        borderBottomWidth:1.2,
+        height:110
+},
     notifbox:{
-        marginLeft:40
+        marginLeft:40,
     },
     notifTitle:{
         // color: '#ecf0f1',
         fontFamily:'Roboto',
         fontWeight: '700',
         fontSize:20,
+        bottom:5
     },
     notifIcon:{
         position:'absolute',
-        top:12,
+        top:16,
         left:8
     },
     notifText:{
         // fontFamily:'Roboto',
         // fontWeight: '900',
         fontSize:16,
-        color:'#333'
+        color:'#333',
+        marginTop:10,
+        fontWeight:"bold",
+        color:db.state.IconcolorActive
     },
    notifDate:{
     position:'absolute',

@@ -93,7 +93,7 @@ class other extends Component {
                     <TouchableOpacity onPress={() => {
                         console.log(this.state.isOn)
                         if (this.state.isOn) {
-                            this.socket.emit("r"+this.state.name,false);
+                            this.socket.emit("rhum",{_id:this.props.route.params.data,_val:false});
                             this.setState({
                                 isOn: false
                             })
@@ -103,8 +103,8 @@ class other extends Component {
                                 Alert.alert("Error!!", "Protoype Offline");
                             }
                             else {
-                                this.socket.emit("r"+this.state.name,true);
-                                Alert.alert("Info", "Relay is On");
+                                this.socket.emit("rhum",{_id:this.props.route.params.data,_val:true});
+                                // Alert.alert("Info", "Relay is On");
                                 this.setState({
                                     isOn: true
                                 })
