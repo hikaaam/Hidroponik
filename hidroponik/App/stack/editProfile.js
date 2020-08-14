@@ -53,6 +53,29 @@ export default class editprofile extends Component {
             Address: DB.state.profile._address
         })
     }
+    nullCheck(foo) {
+        if (foo.length < 1) {
+            return true;
+        }
+        return false;
+    }
+    
+    ContainNumber(foo){    
+        var pattern = /\d/g;
+        return pattern.test(foo);
+   
+    }
+    NumberOnly(foo){
+        var pattern = /^[0-9]+$/;
+        return pattern.test(foo);
+    }
+    ValidPhone(foo){
+        return foo.substr(0,2)=="08" && foo.length == 12 || foo.length == 13;
+    }
+    ValidEmail(foo){
+        var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
+        return pattern.test(foo);
+    }
     render() {
         const { replace } = this.props.navigation;
         return (
@@ -115,15 +138,15 @@ export default class editprofile extends Component {
                     borderColor={this.state.borderColorAddress}
                     textContentType='addressCity' />
 
-                <Text style={s.TextForm}>Email Address</Text>
-                <TextInput
+                {/* <Text style={s.TextForm}>Email Address</Text> */}
+                {/* <TextInput
                     onChangeText={(value) => { this.setState({ Email: value }) }}
                     onFocus={this.onFocusEmail}
                     onBlur={this.onBlurEmail}
                     style={s.InputForm}
                     value={this.state.Email}
                     borderColor={this.state.borderColorEmail}
-                    textContentType='emailAddress' />
+                    textContentType='emailAddress' /> */}
                 <TouchableOpacity
                 onPress={
                     ()=>{ this.props.navigation.replace("changepassword"); }
@@ -270,7 +293,30 @@ export default class editprofile extends Component {
         let linkLocal = 'http://'+db.state.linkLocal+'/hidroponik/api/Mobile/' + DB.state.profile._uid;
         console.log(linkLocal);
         let link = 'http://ta2020.xyz:4000';
+        if(this.nullCheck(_name)){
+            return alert("Please Fill Your Form!!")
+        }
+        if(this.nullCheck(_phone)){
+            return alert("Please Fill Your Form!!")
+        }
+        if(this.nullCheck(_address)){
+            return alert("Please Fill Your Form!!")
+        }
+     
 
+        if(this.ContainNumber(_name)){
+            return alert("Invalid Name!!")
+        }
+        if(!this.NumberOnly(_phone)){
+            return alert("Invalid Phone Number!!")
+        }
+        if(!this.ValidPhone(_phone)){
+            return alert("Invalid!! phone number should start with 08 and have 12 or 13 character length")
+        }
+        // if(!this.ValidEmail(_email)){
+        //     return alert("Invalid Email Address!!");
+        // }
+        
         return fetch(linkLocal, {
             method: 'PUT',
             headers: {
@@ -281,7 +327,7 @@ export default class editprofile extends Component {
                 full_name: _name,
                 phone: _phone,
                 address: _address,
-                email: _email,
+                email: db.state.profile._email,
             }),
         }).then((response) => response.json())
             .then((responseJson) => {

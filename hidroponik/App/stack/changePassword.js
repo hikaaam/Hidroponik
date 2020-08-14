@@ -22,7 +22,10 @@ export default class changePassword extends Component {
             Name: '',
             Phone: '',
             Address: '',
-            RePassword: ''
+            RePassword: '',
+            oldPassword:'',
+            rePassword:'',
+            newPassword:''
         }
         this.onFocusEmail = this.onFocusEmail.bind(this);
         this.onBlurEmail = this.onBlurEmail.bind(this);
@@ -45,6 +48,12 @@ export default class changePassword extends Component {
         this.onFocusRepassword = this.onFocusRepassword.bind(this);
         this.onBlurRepassword = this.onBlurRepassword.bind(this);
     }
+    nullCheck(foo) {
+        if (foo.length < 1) {
+            return true;
+        }
+        return false;
+    }
     componentDidMount() {
         this.setState({
             Email: DB.state.profile._email,
@@ -53,6 +62,7 @@ export default class changePassword extends Component {
             Address: DB.state.profile._address
         })
     }
+ 
     render() {
         const { replace } = this.props.navigation;
         return (
@@ -229,6 +239,16 @@ export default class changePassword extends Component {
         let linkLocal = 'http://'+db.state.linkLocal+'/hidroponik/api/Mobile/' + DB.state.profile._uid;
         console.log(linkLocal);
         let link = 'http://ta2020.xyz:4000';
+        if(this.nullCheck(_oldPassword)){
+            Alert.alert('Failed', "Please Fill The Form!!");
+        }
+        else if(this.nullCheck(_newPassword)){
+            Alert.alert('Failed', "Please Fill The Form!!");
+        }
+        else if(this.nullCheck(_rePassword)){
+            Alert.alert('Failed', "Please Fill The Form!!");
+        }
+        else{
         if (_oldPassword == DB.state.profile._password) {
             if (_newPassword == _rePassword) {
                 return fetch(linkLocal, {
@@ -272,6 +292,7 @@ export default class changePassword extends Component {
             Alert.alert('Failed', "Your Old Password Is Wrong");
         }
     }
+}
 
 
 

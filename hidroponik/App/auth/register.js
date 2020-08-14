@@ -66,6 +66,10 @@ export default class register extends Component {
         var pattern = /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
         return pattern.test(foo);
     }
+    validPassword(foo){
+        var pattern = /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$%^&*-]).{8,}$/;
+        return pattern.test(foo);
+    }
 
     render() {
         const { replace } = this.props.navigation;
@@ -253,16 +257,16 @@ export default class register extends Component {
         let link = 'http://ta2020.xyz:4000';
     
         if(this.nullCheck(_name)){
-            return alert("Please Fill Your Name Correctly!!")
+            return alert("Please Fill Your Form!!")
         }
         if(this.nullCheck(_phone)){
-            return alert("Please Fill Your Phone Number Correctly!!")
+            return alert("Please Fill Your Form!!")
         }
         if(this.nullCheck(_address)){
-            return alert("Please Fill Your Address Correctly!!")
+            return alert("Please Fill Your Form!!")
         }
         if(this.nullCheck(_password)){
-            return alert("Please Fill Your Password Correctly!!")
+            return alert("Please Fill Your Form!!!")
         }
 
 
@@ -278,6 +282,9 @@ export default class register extends Component {
         if(!this.ValidEmail(_email)){
             return alert("Invalid Email Address!!");
         }
+       if(!this.validPassword(_password)){
+        return alert("Password Should be 8 character and contain number!!");
+       }
         
         
 

@@ -49,10 +49,25 @@ class waterlevel extends Component {
             })
         });
         this.socket.on(nama, msg => {
+            
+            var x = parseInt(msg["_val"], 10);
+            console.log(x)
+            if(x<0){
+
+            }
+            else if(Math.abs(this.state.socket[0]-x)>12){
+                
+            }
+            else{
             this.setState({
-                socket: [msg['_val'], msg['_msg']],
-                data: [msg['_val']] + "%"
+                socket: [x, msg['_msg']],
+                data: [x]
             })
+        }
+            // this.setState({
+            //     socket: [msg['_val'], msg['_msg']],
+            //     data: [msg['_val']] + "%"
+            // })
         });
         this.socket.on(this.state.resName, msg => {
             console.log(msg);
@@ -122,7 +137,7 @@ class waterlevel extends Component {
                         },
                         marginTop: 40,
                         textShadowRadius: 1
-                    }}> {this.state.data} </Text>
+                    }}> {this.state.data+"%"} </Text>
                      <Text style={{
                         marginTop:30,
                         fontWeight:"bold",
@@ -157,10 +172,10 @@ class waterlevel extends Component {
                                 if (this.state.data == "Offline!!") {
                                     Alert.alert("Error!!", "Protoype Offline");
                                 }
-                                else if (this.state.data.substr(0, 2) >= 91) {
+                                // else if (this.state.data.substr(0, 2) >= 91) {
 
-                                    Alert.alert("Alert!!", "Your Water Level is Above 90%");
-                                }
+                                //     Alert.alert("Alert!!", "Your Water Level is Above 90%");
+                                // }
                                 else {
                                     this.socket.emit("r" + this.state.name, { _id: this.state.ID, _val: true });
                                     // Alert.alert("Info", "Relay Is On");

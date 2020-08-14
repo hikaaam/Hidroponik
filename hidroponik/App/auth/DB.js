@@ -13,7 +13,7 @@ class DB extends Component {
             Iconcolor: '#999',
             otp: 'null',
             tempEmail: '',
-            linkLocal: 'ta2020.xyz',
+            linkLocal: '192.168.43.47',
             link: "",
             mode:''
 

@@ -130,9 +130,19 @@ export default class Home extends Component {
             })
         });
         this.socket.on("wl", msg => {
+            var x = parseInt(msg["_val"], 10);
+            console.log(x)
+            if(x<0){
+
+            }
+            else if(Math.abs(this.state.wl[0]-x)>7){
+                
+            }
+            else{
             this.setState({
-                wl: [msg['_val']+"%", msg['_msg']]
+                wl: [x, msg['_msg']]
             })
+        }
         });
         this.socket.on("hum", msg => {
             this.setState({
@@ -166,7 +176,7 @@ export default class Home extends Component {
                     </TouchableOpacity> */}
 
                     {this.CardViewRender(this.state.suhu[0], "Temperature","thermometer-half",50,"#a83232")}
-                    {this.CardViewRender(this.state.wl[0], "Water Level","water",30,db.state.IconcolorActive)}
+                    {this.CardViewRender(this.state.wl[0]+"%", "Water Level","water",30,db.state.IconcolorActive)}
                     {this.CardViewRender(this.state.hum[0], "Humidity","cloud",30,"#32a844")}
                     {this.CardViewRender(this.state.tds[0], "Tds","tint",50,"#a87932")}
                     

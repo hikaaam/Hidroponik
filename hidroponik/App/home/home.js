@@ -144,7 +144,8 @@ class home extends Component {
                                                                 style: 'cancel'
                                                         },
                                                         { text: 'OK', onPress: () => { 
-                                                                let linkLocal = 'http://192.168.43.47/hidroponik/api/Prototype/'+item.prototype_id;
+                                                                var ling = db.state.linkLocal;
+                                                                let linkLocal = 'http://'+ling+'/hidroponik/api/Prototype/'+item.prototype_id;
                                                                 let link ='';
                                                                 let requestOptions = {
                                                                         method: 'DELETE'

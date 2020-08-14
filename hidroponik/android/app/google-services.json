@@ -1,0 +1,40 @@
+{
+  "project_info": {
+    "project_number": "923110173321",
+    "firebase_url": "https://hidroponik-f9170.firebaseio.com",
+    "project_id": "hidroponik-f9170",
+    "storage_bucket": "hidroponik-f9170.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:923110173321:android:ad4c2c786e29e71286f458",
+        "android_client_info": {
+          "package_name": "com.hidroponik"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "923110173321-2dh26qtltvrdan32ndr7p07gvae3l15o.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCQgmA0qcazlJnEFNnrUW1b_3faqyKYFDg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "923110173321-2dh26qtltvrdan32ndr7p07gvae3l15o.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
