@@ -37,8 +37,14 @@ import tempertature from './App/IoT/temperature';
 import waterlevel from './App/IoT/waterlevel';
 import settingproto from './App/stack/SettingProto';
 import addproto from './App/home/addprototype';
-import localNotif from './App/localnotification';
+import proto_detail from './App/home/prototype_detail';
+import logs from './App/home/logs';
+import statistik from './App/home/statistik';
+
+
+
 import messaging from '@react-native-firebase/messaging';
+
 import {
   setJSExceptionHandler,
   setNativeExceptionHandler,
@@ -72,8 +78,10 @@ const ScreenOption = ({ navigation }) =>( {
   headerStyle: {
     backgroundColor: '#424874',
     height: 65,
-    borderBottomColor: '#ecf0f1',
-    borderBottomWidth: 1,
+    elevation: 0, // remove shadow on Android
+    shadowOpacity: 0, // remove shadow on iOS
+    // borderBottomColor: '#ecf0f1',
+    // borderBottomWidth: 1,
 
   },
   headerBackImage:()=>( <Icon2 name='chevron-left' size={30} color={'white'} />),
@@ -114,6 +122,7 @@ export default class App extends Component {
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
         console.log("TOKEN:", token);
+        db.state.token = token.token;
       },
      
       // (required) Called when a remote is received or opened, or local notification is opened
@@ -296,6 +305,24 @@ export default class App extends Component {
             {
               headerRight:null,
               title:"Add Prototype"
+            }
+          } />
+           <Stack.Screen name='proto_detail' component={proto_detail} options={
+            {
+              // headerRight:null,
+              title:"Detail "
+            }
+          } />
+          <Stack.Screen name='logs' component={logs} options={
+            {
+              // headerRight:null,
+              title:"Current Logs"
+            }
+          } />
+          <Stack.Screen name='statistik' component={statistik} options={
+            {
+              // headerRight:null,
+              title:"Statistic"
             }
           } />
         </Stack.Navigator>

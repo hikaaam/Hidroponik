@@ -21,7 +21,8 @@ export default class register extends Component {
             Name: '',
             Phone: '',
             Address: '',
-            RePassword: ''
+            RePassword: '',
+            Jenis: ''
         }
         this.onFocusEmail = this.onFocusEmail.bind(this);
         this.onBlurEmail = this.onBlurEmail.bind(this);
@@ -94,16 +95,39 @@ export default class register extends Component {
                         <Icon name="arrow-left" size={40} color={db.state.IconcolorActive} />
                         <Text style={{ color: db.state.IconcolorActive, fontSize: 22, fontWeight: 'bold' }}> Back</Text>
                     </TouchableOpacity>
-                    <Text style={s.TextForm}>Id Prototype</Text>
+                    <Text style={s.TextForm}>Nama Prototype</Text>
                     <TextInput
                         onChangeText={(Name) => {
-                            this.setState({ Name })
+                            this.setState({ Name: Name })
+                        }
+                        }
+                        onFocus={this.onFocusName}
+                        onBlur={this.onBlurName}
+                        style={s.InputForm}
+                        borderColor={this.state.borderColorName} marginBottom={20} />
+
+                    <Text style={s.TextForm}>Jenis Tanaman</Text>
+                    <TextInput
+                        onChangeText={(Name) => {
+                            this.setState({ Jenis: Name })
+                        }
+                        }
+                        onFocus={this.onFocusName}
+                        onBlur={this.onBlurName}
+                        style={s.InputForm}
+                        borderColor={this.state.borderColorName} marginBottom={20} />
+
+                    <Text style={s.TextForm}>Nomor Prototype</Text>
+                    <TextInput
+                        onChangeText={(Name) => {
+                            this.setState({ Id: Name })
                         }
                         }
                         onFocus={this.onFocusName}
                         onBlur={this.onBlurName}
                         style={s.InputForm}
                         borderColor={this.state.borderColorName} />
+
 
 
 
@@ -227,7 +251,9 @@ export default class register extends Component {
             },
             body: JSON.stringify({
                 id: id,
-                pid: this.state.Name
+                pid: this.state.Id,
+                nama:this.state.Name,
+                jenis:this.state.Jenis
             })
         }).then((data) => {
             this.props.navigation.replace("home");

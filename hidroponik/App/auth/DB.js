@@ -15,19 +15,21 @@ class DB extends Component {
             tempEmail: '',
             linkLocal: '192.168.43.47',
             link: "",
-            mode:''
+            mode:'',
+            token:''
 
         }
 
     }
-    CreateAccount(uid, name, phone, address, email, password) {
+    CreateAccount(uid, name, phone, address, email, password, token) {
         let account = {
             _name: name,
             _address: address,
             _email: email,
             _password: password,
             _phone: phone,
-            _uid: uid
+            _uid: uid,
+            _token:token
         }
         AsyncStorage.setItem('profile', JSON.stringify(account), (err, result) => {
             if (err) {

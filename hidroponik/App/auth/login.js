@@ -166,7 +166,8 @@ export default class login extends Component {
                             responseJson['phone_number'],
                             responseJson['address'],
                             responseJson['email'],
-                            responseJson['password']
+                            responseJson['password'],
+                            responseJson['token']
                         );
                         this.props.navigation.replace('otp', { Email: mail });
                     }

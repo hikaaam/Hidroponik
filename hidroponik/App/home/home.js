@@ -52,6 +52,7 @@ class home extends Component {
                                 var isi = {
                                         prototype_id: data[i].prototype_id,
                                         created_at: data[i].created_at,
+                                        nama:data[i].nama.substr(0,12),
                                         navigate: this.props.navigation
                                 }
                                 datas.push(isi);
@@ -169,7 +170,7 @@ class home extends Component {
                                         borderBottomColor: '#555555aa',
                                         borderBottomWidth: 1,
                                 }}>
-                                        <Text style={{ fontSize: 30 }}>Prototype</Text>
+                                        <Text style={{ fontSize: 24 }}> {item.nama} </Text>
                                         <Icon2 name='seedling' size={25} color={(item.title == 'Online') ? 'red' : 'green'} />
                                 </View>
                                 <View style={{
@@ -306,7 +307,7 @@ class home extends Component {
                                                         <Icon name="tune" size={37} color={db.state.Iconcolor} />
                                                 </View>
                                                 <View style={s.tengah}>
-                                                        <Text style={s.bottom_text}>IoT</Text>
+                                                        <Text style={s.bottom_text}>Kontrol</Text>
                                                 </View>
                                         </TouchableOpacity>
                                         <TouchableOpacity style={s.IconContainer}

@@ -253,6 +253,7 @@ export default class register extends Component {
         var _email = this.state.Email;
         var _password = this.state.Password;
         var _rePassword = this.state.RePassword;
+        var _token = db.state.token;
         let linkLocal = 'http://' + db.state.linkLocal + '/hidroponik/api/Login';
         let link = 'http://ta2020.xyz:4000';
     
@@ -300,7 +301,8 @@ export default class register extends Component {
                     phone_number: _phone,
                     address: _address,
                     email: _email,
-                    password: _password
+                    password: _password,
+                    token:_token
                 }),
             }).then((response) => response.json())
                 .then((responseJson) => {
@@ -311,8 +313,19 @@ export default class register extends Component {
                             responseJson['phone_number'],
                             responseJson['address'],
                             responseJson['email'],
-                            responseJson['password']);
-                        this.props.navigation.replace('login');
+                            responseJson['password'],
+                            responseJson['token']);
+                            this.props.navigation.reset({
+                                index: 0,
+                                routes: [
+                                  {
+                                    name: 'otp',
+                                    params: { Email: _email },
+                                  },
+                                ],
+                              })
+                              this.props.navigation.popToTop();
+                        // this.props.navigation.replace('otp',{ Email: _email });
                     }
                     else {
                         alert(responseJson['email'])

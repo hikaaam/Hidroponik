@@ -125,7 +125,7 @@ export default class Profile extends Component {
                             <Icon name="tune" size={37} color={db.state.Iconcolor} />
                         </View>
                         <View style={s.tengah}>
-                            <Text style={s.bottom_text}>IoT</Text>
+                            <Text style={s.bottom_text}>Kontrol</Text>
                         </View>
                     </TouchableOpacity>
                     <TouchableOpacity style={s.IconContainer}

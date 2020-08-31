@@ -7,6 +7,7 @@ import Icon from 'react-native-vector-icons/FontAwesome5';
 import * as Progress from 'react-native-progress';
 
 import DB from '../App/auth/DB';
+import db from "../App/auth/DB";
 
 const styles = StyleSheet.create(
     {
@@ -64,23 +65,28 @@ export default class Splash extends Component {
                 console.log(value);
                 setTimeout(() => {
                     DB.GetAccount();
+                    // console.log(DB.state.token)
+                    try {
+                        let link = 'http://'+DB.state.linkLocal+'/hidroponik/api/Login/';
+                        fetch(link+DB.state.profile._uid,{
+                            method: 'PUT',
+                            headers: {
+                                Accept: 'application/json',
+                                'Content-Type': 'application/json',
+                            },
+                            body: JSON.stringify({
+                                token:DB.state.token
+                            })
+                        }).then((res)=> res.json()).then((json)=>{
+                            console.log(json);
+                        } );
+                        
+                    } catch (error) {
+                        console.log(error);
+                    }
                     AsyncStorage.getItem('otp').then((values) => {
-                        if (values) {
-                            let linkLocal = 'http://'+DB.linkLocal+'/hidroponik/mobileAuth/';
-                            let link= 'http:/ta2020.xyz/hidroponik/index.php/mobileAuth/';
-                            try {
-                                fetch(link+DB.state.profile._uid)
-                                .then((response) => response.json())
-                                .then((responseJson) => {
-                               
-                                    AsyncStorage.setItem('devices',JSON.stringify(responseJson));
-                                //  console.log(responseJson);
-                                });
-                             
-                              } catch (error) {
-                                  console.log(error);
-                              }
-                            this.props.navigation.replace('home');
+                        if (values) {                   
+                             this.props.navigation.replace('home');
                         
                         }
                         else {

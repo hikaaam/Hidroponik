@@ -20,12 +20,16 @@ export default class Home extends Component {
             suhu: ['offline!!'],
             tds: ['offline!!'],
             wl: ['offline!!'],
-            hum: ['offline!!']
+            hum: ['offline!!'],
+            id:""
         };
     }
-    CardViewRender(data, nama,Ikon,ukuran,warna) {
+    CardViewRender(data,nama,Ikon,ukuran,warna,nav) {
 
         return (
+            <TouchableOpacity onPress={()=>{
+                this.props.navigation.navigate("proto_detail",nav);
+            }}> 
             <CardView style={{
                 backgroundColor: warna, height: 180, width: Dimensions.get('window').width - 30, marginLeft: 15, marginVertical: 4, justifyContent: 'center',
                 alignItem: 'center'
@@ -100,13 +104,16 @@ export default class Home extends Component {
                     }}> {nama} </Text>
                 </View>
             </CardView>
+            </TouchableOpacity>
         );
 
     }
     componentDidMount() {
         db.GetAccount();
         let id = this.props.route.params.id;
-
+        this.setState({
+            id:id
+        })
         let local = "http://" + db.state.linkLocal + ":4000";
 
         let host = "http://ta2020.xyz:4000";
@@ -122,7 +129,7 @@ export default class Home extends Component {
                 suhu: [msg['_val']+"°c", msg['_msg']]
 
             })
-            this.check
+            // this.check
         });
         this.socket.on("tds", msg => {
             this.setState({
@@ -175,10 +182,10 @@ export default class Home extends Component {
                         </ImageBackground>
                     </TouchableOpacity> */}
 
-                    {this.CardViewRender(this.state.suhu[0], "Temperature","thermometer-half",50,"#a83232")}
-                    {this.CardViewRender(this.state.wl[0]+"%", "Water Level","water",30,db.state.IconcolorActive)}
-                    {this.CardViewRender(this.state.hum[0], "Humidity","cloud",30,"#32a844")}
-                    {this.CardViewRender(this.state.tds[0], "Tds","tint",50,"#a87932")}
+                    {this.CardViewRender(this.state.suhu[0], "Temperature","thermometer-half",50,"#a83232",{sensor:'temp',ext:"°c",id:this.state.id,color:"#a83232",icon:"thermometer-half"})}
+                    {this.CardViewRender(this.state.wl[0]+"%", "Water Level","water",30,db.state.IconcolorActive,{sensor:'wl',ext:"%",id:this.state.id,color:db.state.IconcolorActive,icon:"water"})}
+                    {this.CardViewRender(this.state.hum[0], "Humidity","cloud",30,"#32a844",{sensor:'hum',ext:"%",id:this.state.id,color:"#32a844",icon:"cloud"})}
+                    {this.CardViewRender(this.state.tds[0], "Tds","tint",50,"#a87932",{sensor:'tds',ext:"PPM",id:this.state.id,color:"#a87932",icon:"tint"})}
                     
                     {/* <TouchableOpacity>
                         <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}

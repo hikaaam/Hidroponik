@@ -23,6 +23,7 @@
     "react": "16.9.0",
     "react-native": "^0.63.2",
     "react-native-cardview": "^2.0.5",
+    "react-native-chart-kit": "^6.6.0",
     "react-native-exception-handler": "^2.10.8",
     "react-native-gesture-handler": "^1.6.0",
     "react-native-image-slider-box": "^1.0.12",
@@ -33,6 +34,7 @@
     "react-native-safe-area-context": "^0.7.3",
     "react-native-screens": "^2.2.0",
     "react-native-snap-carousel": "^3.9.0",
+    "react-native-svg": "^12.1.0",
     "react-native-vector-icons": "^6.6.0",
     "socket.io-client": "^2.3.0"
   },

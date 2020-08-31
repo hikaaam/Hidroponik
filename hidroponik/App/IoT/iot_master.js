@@ -154,7 +154,7 @@ export default class iot_master extends Component {
                         <Icon name="tune" size={37} color={db.state.IconcolorActive} />
                     </View>
                     <View style={s.tengah}>
-                        <Text style={s.bottom_text_active}>IoT</Text>
+                        <Text style={s.bottom_text_active}>Kontrol</Text>
                     </View>
                 </View>
                 <TouchableOpacity style={s.IconContainer}
