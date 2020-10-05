@@ -14,7 +14,7 @@ class prototype_detail extends Component {
         this.state = {
             sensor: "",
             ext: "",
-            data: ["offline"],
+            data: ["offline!!"],
             id: "",
             color: "",
             height: Dimensions.get("window").height,
@@ -30,6 +30,7 @@ class prototype_detail extends Component {
     }
     async componentDidMount() {
         let data = this.props.route.params;
+        console.log(data)
         let sensor = data.sensor;
         var nama = "";
         if (sensor == "temp") {
@@ -52,22 +53,24 @@ class prototype_detail extends Component {
             id: data.id,
             color: data.color,
             name: nama,
-            icon:data.icon
+            icon:data.icon,
+            data:data.val
         })
         let local = "http://" + db.state.linkLocal + ":4000";
-        try {
-            this.socket = io(local);
-            this.socket.on('connect', function (data) {
-                this.emit('new user', data.id);
-            });
-            this.socket.on(data.sensor, msg => {
-                this.setState({
-                    data: [msg['_val'], msg['_msg']]
-                })
-            });
-        } catch (error) {
-            console.log(error)
-        }
+        // try {
+        //     this.socket = io(local);
+        //     this.socket.on('connect', function (data) {
+        //         this.emit('new user', data.id);
+        //     });
+        //     this.socket.on(data.sensor, msg => {
+        //         console.log(msg)
+        //         this.setState({
+        //             data: [msg['_val'], msg['_msg']]
+        //         })
+        //     });
+        // } catch (error) {
+        //     console.log(error)
+        // }
         this.ticking = setInterval(() => {
             this.getTime();
         }, 1000);
@@ -150,7 +153,7 @@ class prototype_detail extends Component {
                             <Text
                                 style={{
                                     color: "white",
-                                    fontSize: (this.state.data[0]="offline") ? this.state.width/16 : this.state.width / 6 
+                                    fontSize: (this.state.data[0]=="offline!!") ? this.state.width/16 : this.state.width / 8 
                                 }}
                             >{this.state.data[0]}</Text>
                             <Text style={{
@@ -159,7 +162,7 @@ class prototype_detail extends Component {
                                 color: "white",
                                 fontSize: this.state.width / 24
                             }}>
-                                {(this.state.data[0]="offline") ?"!!":this.state.ext}
+                                {(this.state.data[0]=="offline!!") ?"":this.state.ext}
                             </Text>
                         </View>
                     </View>

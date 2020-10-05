@@ -25,7 +25,7 @@ import AuthForget from "./App/auth/forgetPassword";
 import Prototype from './App/home/prototype';
 const Stack = createStackNavigator();
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-import Icon2 from 'react-native-vector-icons/FontAwesome';
+import Icon2 from 'react-native-vector-icons/FontAwesome5';
 import db from "./App/auth/DB";
 import editProfile from "./App/stack/editProfile";
 import changePassword from './App/stack/changePassword';
@@ -72,9 +72,18 @@ var PushNotification = require("react-native-push-notification");
 // const navigation = useNavigation();
 const Tab = createBottomTabNavigator();
 
+const OptionSetting = ({ navigation }) => ({
+  headerRight:null,
+  headerLeft: () => (
+    <TouchableOpacity onPress={() => {
+      navigation.replace('home')
+    }}>
+      <Icon2 name="chevron-left" color="#ecf0f1" size={38} />
+    </TouchableOpacity>
+  ),
+})
 
-
-const ScreenOption = ({ navigation }) =>( {
+const ScreenOption = ({ navigation }) => ({
   headerStyle: {
     backgroundColor: '#424874',
     height: 65,
@@ -84,7 +93,7 @@ const ScreenOption = ({ navigation }) =>( {
     // borderBottomWidth: 1,
 
   },
-  headerBackImage:()=>( <Icon2 name='chevron-left' size={30} color={'white'} />),
+  headerBackImage: () => (<Icon2 name='chevron-left' size={30} color={'white'} />),
   headerTintColor: '#fff',
   headerTitleStyle: {
     fontWeight: 'bold',
@@ -104,7 +113,7 @@ const ScreenOption = ({ navigation }) =>( {
   },
   headerRight: () => (
     <TouchableOpacity onPress={() => {
-      navigation.push('Setting')
+      navigation.replace('Setting')
     }}>
       <Icon name="settings" color="#ecf0f1" size={38} />
     </TouchableOpacity>
@@ -117,48 +126,48 @@ const ScreenOption = ({ navigation }) =>( {
 
 export default class App extends Component {
 
-  async componentDidMount(){
+  async componentDidMount() {
     PushNotification.configure({
       // (optional) Called when Token is generated (iOS and Android)
       onRegister: function (token) {
         console.log("TOKEN:", token);
         db.state.token = token.token;
       },
-     
+
       // (required) Called when a remote is received or opened, or local notification is opened
       onNotification: function (notification) {
         console.log("NOTIFICATION:", notification);
-     
+
         // process the notification
-     
+
         // (required) Called when a remote is received or opened, or local notification is opened
         // notification.finish(PushNotificationIOS.FetchResult.NoData);
       },
-     
+
       // // (optional) Called when Registered Action is pressed and invokeApp is false, if true onNotification will be called (Android)
       // onAction: function (notification) {
       //   console.log("ACTION:", notification.action);
       //   console.log("NOTIFICATION:", notification);
-     
+
       //   // process the action
       // },
-     
+
       // // (optional) Called when the user fails to register for remote notifications. Typically occurs when APNS is having issues, or the device is a simulator. (iOS)
-      onRegistrationError: function(err) {
+      onRegistrationError: function (err) {
         console.error(err.message, err);
       },
-     
+
       // // IOS ONLY (optional): default: all - Permissions to register.
       // permissions: {
       //   alert: true,
       //   badge: true,
       //   sound: true,
       // },
-     
+
       // // Should the initial notification be popped automatically
       // default: true
       // popInitialNotification: true,
-     
+
       // /**
       //  * (optional) default: true
       //  * - Specified if permissions (ios) and token (android and ios) will requested or not,
@@ -173,7 +182,7 @@ export default class App extends Component {
 
     return (
 
-      
+
       <NavigationContainer>
         <Stack.Navigator
           screenOptions={ScreenOption}>
@@ -194,7 +203,7 @@ export default class App extends Component {
             }} />
           <Stack.Screen name='forget' component={AuthForget} options={
             {
-              title:'Forget Password',
+              title: 'Forget Password',
               headerRight: null
             }} />
           <Stack.Screen name='otp' component={AuthOTP} options={
@@ -208,7 +217,7 @@ export default class App extends Component {
               headerRight: null
             }
           } />
-           <Stack.Screen name='settingPrototype' component={settingPrototype} options={
+          <Stack.Screen name='settingPrototype' component={settingPrototype} options={
             {
               title: "Prototype Settings",
               headerRight: null
@@ -216,7 +225,7 @@ export default class App extends Component {
           } />
           <Stack.Screen name='changepassword' component={changePassword} options={
             {
-              title:"Change Password",
+              title: "Change Password",
               headerRight: null
             }} />
           <Stack.Screen name="home" component={Home}
@@ -230,99 +239,95 @@ export default class App extends Component {
           <Stack.Screen name="profile" component={Profile}
             options={
               {
-                title:'Profile'
+                title: 'Profile'
               }
             }
           />
           <Stack.Screen name='iot' component={Iot}
             options={
               {
-                title:'IoT'
+                title: 'IoT'
               }
             }
           />
           <Stack.Screen name='notifications' component={Notifications}
             options={
               {
-                title:'Notifications'
+                title: 'Notifications'
               }
             }
           />
-          <Stack.Screen name='Setting' component={Settings} options={
+          <Stack.Screen name='Setting' component={Settings} options={OptionSetting} />
+          <Stack.Screen name='editprofile' component={editProfile} options={
             {
-              headerRight:null
-            }
-          } />
-           <Stack.Screen name='editprofile' component={editProfile} options={
-            {
-              headerRight:null,
-              title:"Edit Profile"
+              headerRight: null,
+              title: "Edit Profile"
             }
           } />
           <Stack.Screen name='changepasswordOtp' component={changepasswordOtp} options={
             {
-              headerRight:null,
-              title:"Otp"
+              headerRight: null,
+              title: "Otp"
             }
           } />
-         <Stack.Screen name='changepasswordEmail' component={changepasswordEmail} options={
+          <Stack.Screen name='changepasswordEmail' component={changepasswordEmail} options={
             {
-              headerRight:null,
-              title:"Change Password"
+              headerRight: null,
+              title: "Change Password"
             }
           } />
           <Stack.Screen name='waterlevel' component={waterlevel} options={
             {
-              headerRight:null,
-              title:"Water Level"
+              headerRight: null,
+              title: "Water Level"
             }
           } />
           <Stack.Screen name='pupuk' component={pupuk} options={
             {
-              headerRight:null,
-              title:"Fertilizer"
+              headerRight: null,
+              title: "Fertilizer"
             }
           } />
           <Stack.Screen name='temp' component={tempertature} options={
             {
-              headerRight:null,
-              title:"Temperature"
+              headerRight: null,
+              title: "Temperature"
             }
           } />
           <Stack.Screen name='other' component={other} options={
             {
-              headerRight:null,
-              title:"Other"
+              headerRight: null,
+              title: "Other"
             }
           } />
-           <Stack.Screen name='settingproto' component={settingproto} options={
+          <Stack.Screen name='settingproto' component={settingproto} options={
             {
-              headerRight:null,
-              title:"Settings Prototype"
+              headerRight: null,
+              title: "Settings Prototype"
             }
           } />
-           <Stack.Screen name='addproto' component={addproto} options={
+          <Stack.Screen name='addproto' component={addproto} options={
             {
-              headerRight:null,
-              title:"Add Prototype"
+              headerRight: null,
+              title: "Add Prototype"
             }
           } />
-           <Stack.Screen name='proto_detail' component={proto_detail} options={
+          <Stack.Screen name='proto_detail' component={proto_detail} options={
             {
               // headerRight:null,
-              title:"Detail "
+              title: "Detail "
             }
           } />
           <Stack.Screen name='logs' component={logs} options={
             {
               // headerRight:null,
-              title:"Current Logs"
+              title: "Current Logs"
             }
           } />
           <Stack.Screen name='statistik' component={statistik} options={
             {
               // headerRight:null,
-              title:"Statistic"
+              title: "Statistic"
             }
           } />
         </Stack.Navigator>

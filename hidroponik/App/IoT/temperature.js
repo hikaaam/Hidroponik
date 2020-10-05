@@ -7,7 +7,7 @@ import { Button } from 'react-native-paper';
 import { TouchableOpacity } from 'react-native-gesture-handler';
 import io from 'socket.io-client';
 
-class waterlevel extends Component {
+class temperature extends Component {
     constructor(props) {
         super(props);
         this.state = {
@@ -33,7 +33,7 @@ class waterlevel extends Component {
         this.socket.on('connect', function (data) {
             // io("http://192.168.43.47:4000").emit('new user', db.state.profile._email );
             this.emit('new user', id);
-            this.emit("checktemp", id);
+            this.emit("checkwl", id);
             this.emit("checkmode", id);
         });
         this.socket.on("checkmode", msg => {
@@ -49,19 +49,35 @@ class waterlevel extends Component {
             })
         });
         this.socket.on(nama, msg => {
+            
+            var x = parseInt(msg["_val"], 10);
+            if(x<0){
+
+            }
+            else if(Math.abs(this.state.socket[0]-x)>12){
+                
+            }
+            else{
             this.setState({
-                socket: [msg['_val'], msg['_msg']],
-                data: [msg['_val']] + "°c"
+                socket: [x, msg['_msg']],
+                data: [x]
             })
+        }
+            // this.setState({
+            //     socket: [msg['_val'], msg['_msg']],
+            //     data: [msg['_val']] + "%"
+            // })
         });
         this.socket.on(this.state.resName, msg => {
+            console.log("*****************************");
             console.log(msg);
+            
             this.setState({
                 isOn: msg
             })
         });
-        this.socket.on("checktemp", msg => {
-            console.log(msg);
+        this.socket.on("checkwl", msg => {
+            console.log("test : "+msg);
             this.setState({
                 isOn: msg
             })
@@ -75,16 +91,14 @@ class waterlevel extends Component {
         }
         else{
             if(this.state.isOn){
-                return "Kipas Menyala !! ";
+                return "Pompa Air Menyala !! ";
             }
             else{
-                return "Kipas Mati !! ";
+                return "Pompa Air Mati !! ";
             }
         }
     }
     render() {
-        console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
-        console.disableYellowBox = true;
         return (
             <View style={{
                 flex: 1,
@@ -122,8 +136,8 @@ class waterlevel extends Component {
                         },
                         marginTop: 40,
                         textShadowRadius: 1
-                    }}> {this.state.data} </Text>
-                    <Text style={{
+                    }}> {this.state.data+"%"} </Text>
+                     <Text style={{
                         marginTop:30,
                         fontWeight:"bold",
                         fontSize:20,
@@ -144,6 +158,7 @@ class waterlevel extends Component {
                         marginBottom: 15,
                     }}>Click To Turn {this.state.isOn ? 'Off' : 'On'} Relay</Text>
                     <TouchableOpacity onPress={() => {
+                        console.log(this.state.isOtomatis)
                         console.log(this.state.isOn)
                         if (this.state.isOtomatis) {
                             Alert.alert("Info", "Silahkan matikan mode otomatis untuk melakukan IoT");
@@ -157,10 +172,10 @@ class waterlevel extends Component {
                                 if (this.state.data == "Offline!!") {
                                     Alert.alert("Error!!", "Protoype Offline");
                                 }
-                                else if (this.state.data.substr(0, 2) >= 91) {
+                                // else if (this.state.data.substr(0, 2) >= 91) {
 
-                                    Alert.alert("Alert!!", "Your Water Level is Above 90%");
-                                }
+                                //     Alert.alert("Alert!!", "Your Water Level is Above 90%");
+                                // }
                                 else {
                                     this.socket.emit("r" + this.state.name, { _id: this.state.ID, _val: true });
                                     // Alert.alert("Info", "Relay Is On");
@@ -178,4 +193,4 @@ class waterlevel extends Component {
     }
 }
 
-export default waterlevel;
+export default temperature;

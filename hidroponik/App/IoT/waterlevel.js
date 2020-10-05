@@ -51,7 +51,6 @@ class waterlevel extends Component {
         this.socket.on(nama, msg => {
             
             var x = parseInt(msg["_val"], 10);
-            console.log(x)
             if(x<0){
 
             }
@@ -70,7 +69,9 @@ class waterlevel extends Component {
             // })
         });
         this.socket.on(this.state.resName, msg => {
+            console.log("*****************************");
             console.log(msg);
+            
             this.setState({
                 isOn: msg
             })
@@ -98,8 +99,6 @@ class waterlevel extends Component {
         }
     }
     render() {
-        console.ignoredYellowBox = ['Warning: Each', 'Warning: Failed'];
-        console.disableYellowBox = true;
         return (
             <View style={{
                 flex: 1,
@@ -160,6 +159,7 @@ class waterlevel extends Component {
                     }}>Click To Turn {this.state.isOn ? 'Off' : 'On'} Relay</Text>
                     <TouchableOpacity onPress={() => {
                         console.log(this.state.isOtomatis)
+                        console.log(this.state.isOn)
                         if (this.state.isOtomatis) {
                             Alert.alert("Info", "Silahkan matikan mode otomatis untuk melakukan IoT");
                         }

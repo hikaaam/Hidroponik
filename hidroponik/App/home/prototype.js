@@ -126,19 +126,19 @@ export default class Home extends Component {
         this.socket.on("temp", msg => {
             // console.log(msg);
             this.setState({
-                suhu: [msg['_val']+"°c", msg['_msg']]
+                suhu: [msg['_val'], '']
 
             })
             // this.check
         });
         this.socket.on("tds", msg => {
             this.setState({
-                tds: [msg['_val']+"-ppm", msg['_msg']]
+                tds: [msg['_val'], '']
             })
         });
         this.socket.on("wl", msg => {
             var x = parseInt(msg["_val"], 10);
-            console.log(x)
+            // console.log(x)
             if(x<0){
 
             }
@@ -147,13 +147,13 @@ export default class Home extends Component {
             }
             else{
             this.setState({
-                wl: [x, msg['_msg']]
+                wl: [x, '']
             })
         }
         });
         this.socket.on("hum", msg => {
             this.setState({
-                hum: [msg['_val']+"%", msg['_msg']]
+                hum: [msg['_val'], '']
             })
         });
         console.log(this.state.suhu.length);
@@ -182,10 +182,10 @@ export default class Home extends Component {
                         </ImageBackground>
                     </TouchableOpacity> */}
 
-                    {this.CardViewRender(this.state.suhu[0], "Temperature","thermometer-half",50,"#a83232",{sensor:'temp',ext:"°c",id:this.state.id,color:"#a83232",icon:"thermometer-half"})}
-                    {this.CardViewRender(this.state.wl[0]+"%", "Water Level","water",30,db.state.IconcolorActive,{sensor:'wl',ext:"%",id:this.state.id,color:db.state.IconcolorActive,icon:"water"})}
-                    {this.CardViewRender(this.state.hum[0], "Humidity","cloud",30,"#32a844",{sensor:'hum',ext:"%",id:this.state.id,color:"#32a844",icon:"cloud"})}
-                    {this.CardViewRender(this.state.tds[0], "Tds","tint",50,"#a87932",{sensor:'tds',ext:"PPM",id:this.state.id,color:"#a87932",icon:"tint"})}
+                    {this.CardViewRender(this.state.suhu[0]+"°c", "Temperature","thermometer-half",50,"#a83232",{sensor:'temp',ext:"°c",id:this.state.id,color:"#a83232",icon:"thermometer-half",val:this.state.suhu})}
+                    {this.CardViewRender(this.state.wl[0]+"%", "Water Level","water",30,db.state.IconcolorActive,{sensor:'wl',ext:"%",id:this.state.id,color:db.state.IconcolorActive,icon:"water",val:this.state.wl})}
+                    {this.CardViewRender(this.state.hum[0]+"%", "Humidity","cloud",30,"#32a844",{sensor:'hum',ext:"%",id:this.state.id,color:"#32a844",icon:"cloud",val:this.state.hum})}
+                    {this.CardViewRender(this.state.tds[0]+"PPM", "Tds","tint",50,"#a87932",{sensor:'tds',ext:"PPM",id:this.state.id,color:"#a87932",icon:"tint",val:this.state.tds})}
                     
                     {/* <TouchableOpacity>
                         <ImageBackground style={b.bodyItem} imageStyle={b.imageItem}

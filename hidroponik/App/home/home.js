@@ -351,6 +351,6 @@ class home extends Component {
 
 export default home;
 
-function pindah() {
-        this.props.navigation.replace('prototype')
-}
+// function pindah() {
+//         this.props.navigation.replace('prototype')
+// }
