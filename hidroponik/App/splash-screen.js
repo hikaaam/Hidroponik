@@ -4,7 +4,7 @@ import {
     Image, AsyncStorage, Dimensions
 } from "react-native";
 import Icon from 'react-native-vector-icons/FontAwesome5';
-import * as Progress from 'react-native-progress';
+// import * as Progress from 'react-native-progress';
 
 import DB from '../App/auth/DB';
 import db from "../App/auth/DB";
@@ -71,7 +71,7 @@ export default class Splash extends Component {
                         fetch(link+DB.state.profile._uid,{
                             method: 'PUT',
                             headers: {
-                                Accept: 'application/json',
+                                Accept: 'application/json', 
                                 'Content-Type': 'application/json',
                             },
                             body: JSON.stringify({
@@ -134,11 +134,11 @@ export default class Splash extends Component {
                 /> */}
                 <Icon style={{ marginBottom: 30 }} name='seedling' color='green' size={Dimensions.get('window').width / 3} />
                 {/* {this.state.loading} */}
-                <Progress.Bar
+                {/* <Progress.Bar
                     style={styles.progress}
                     progress={this.state.progress}
                     indeterminate={this.state.indeterminate}
-                />
+                /> */}
                 {/* <Text style={styles.splashtext}>
                     Welcome To the Future
                 </Text> */}

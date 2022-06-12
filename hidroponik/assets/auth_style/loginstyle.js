@@ -15,7 +15,7 @@ module.exports = StyleSheet.create(
             borderBottomWidth:2.5,
             marginBottom:15,
             fontFamily:'serif',
-            fontSize:22,
+            fontSize:16,
             color:'black',
             fontWeight:'700',
             borderRadius: 4,
